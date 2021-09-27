@@ -1,0 +1,51 @@
+@function hex-to-rgb($hex)
+  @return red($hex), green($hex), blue($hex)
+
+@mixin accentMixin($name, $accent, $secondary, $tertiary)
+  --accent-#{$name}: #{$accent}
+
+  &[data-accent="#{$name}"]
+    --accent: #{$accent}
+    --accent-rgb: #{hex-to-rgb($accent)}
+    --accent-secondary: #{$secondary}
+    --accent-secondary-rgb: #{hex-to-rgb($secondary)}
+    --accent-tertiary: #{$tertiary}
+    --accent-tertiary-rgb: #{hex-to-rgb($tertiary)}
+
+@mixin themeMixin($name, $primary, $secondary, $tertiary, $darkFont: false)
+  --theme-#{$name}: #{$tertiary}
+
+  &[data-theme="#{$name}"]
+    --background-primary: #{$primary}
+    --background-primary-rgb: #{hex-to-rgb($primary)}
+    --background-secondary: #{$secondary}
+    --background-secondary-rgb: #{hex-to-rgb($secondary)}
+    --background-tertiary: #{$tertiary}
+    --background-tertiary-rgb: #{hex-to-rgb($tertiary)}
+
+    @if $darkFont
+      --text-normal: #262626
+      --text-jaded: #404040
+      --text-muted: #737373
+
+html
+
+  // defaults
+  --mobileMaxWidth: #{$mobileMaxWidth}
+  --text-normal: #FFF
+  --text-jaded: #C5D1DA
+  --text-muted: #6E7E8C
+  --text-error: #E0245E
+
+  // accents
+  @include accentMixin('blue', #2bb7ff, #2bb7ff, #2afe83)
+  @include accentMixin('green', #9EFF36, #9EFF36, #FF3681)
+  @include accentMixin('orange', #FFBB00, #FFD500, #A975FF)
+  @include accentMixin('purple', #7800FF, #A975FF, #9EFF36)
+  @include accentMixin('ruby', #ED485F, #FF465F, #FFFF60)
+
+  // themes
+  @include themeMixin('dark', #1e232f, #12151C, #323a4e)
+  @include themeMixin('purple', #22004D, #1A003B, #2C005A)
+  @include themeMixin('blue', #00264D, #001D3C, #002E5D)
+  @include themeMixin('light', #FFF, #F5F8FA, #E4E8EB, true)

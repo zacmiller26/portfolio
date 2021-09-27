@@ -1,0 +1,119 @@
+@import ../../../styles/sass/mixins
+@import ../../../styles/sass/vars
+
+
+.root
+  padding: $spacing
+  display: flex
+  position: relative
+
+  .optionsContainer
+    position: relative
+    flex: 1
+
+    &:first-child .toggleBtn
+      border-radius: 1rem 0 0 1rem
+      margin-right: 1px
+
+    &:last-child .toggleBtn
+      border-radius: 0 1rem 1rem 0
+      margin-left: 1px
+
+    .toggleBtn
+      @include buttonReset
+      background: var(--background-primary)
+      position: relative
+      width: 100%
+      display: flex
+      align-items: center
+      justify-content: center
+      padding: .75rem
+      text-transform: capitalize
+      font-weight: 500
+      font-size: .85rem
+      color: var(--text-jaded)
+
+      i
+        font-weight: 300
+        margin-left: .25rem
+        color: var(--accent)
+
+      &:hover, &[data-active="true"]
+        background: var(--background-tertiary)
+        color: var(--text-normal)
+
+    ul.optionsList
+      $gapSize: $spacing * .5
+      $margin: ($spacing * .5) * 1.15
+      width: 100%
+      padding: $spacing * .45
+      background: var(--background-primary)
+      border-radius: $spacing * .5
+      margin-bottom: $margin
+      box-shadow: 0 1px 3px rgba(var(--background-tertiary-rgb), .35)
+      position: relative
+
+      &:after
+        content: ""
+        width: 0
+        height: 0
+        border-left: $gapSize solid transparent
+        border-right: $gapSize solid transparent
+        border-top: $gapSize solid var(--background-primary)
+        display: block
+        position: absolute
+        margin-left: auto
+        margin-right: auto
+        left: 0
+        right: 0
+        bottom: - $gapSize
+
+      &[data-top="true"]
+        margin-bottom: 0
+        margin-top: $margin
+        background: var(--background-tertiary)
+
+        &:after
+          bottom: unset
+          top: - $gapSize
+          border-left: $gapSize solid transparent
+          border-right: $gapSize solid transparent
+          border-bottom: $gapSize solid var(--background-tertiary)
+          border-top: unset
+
+        button
+          background: var(--background-primary)
+
+      &.themeOptions
+        flex: 1
+
+      li
+        display: block
+        margin: 0 0 .3rem
+
+        &:hover
+          opacity: 1
+
+          button
+            border-color: var(--accent) !important
+
+        &:last-child
+          margin-bottom: 0
+
+        button
+          $size: 1.8rem
+          @include buttonReset
+          border-radius: $size
+          background: rgba(var(--background-tertiary-rgb), 1)
+          transition: border-color .3s
+          padding: .5rem 1rem
+          text-transform: capitalize
+          font-weight: 500
+          font-size: .9rem
+
+          &:hover
+            background: rgba(var(--background-secondary-rgb), .85)
+
+          &[data-selected="true"]
+            color: var(--accent)
+            background: var(--background-secondary)

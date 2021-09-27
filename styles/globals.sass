@@ -1,0 +1,60 @@
+@import reset
+@import sass/vars
+@import sass/mixins
+@import sass/themes
+
+html, body
+  background: #000
+  background: var(--background-secondary)
+  color: #FFF
+  color: var(--text-normal)
+  font-family: $fontFamily
+  margin: 0
+  padding: 0
+  height: -webkit-fill-available
+  z-index: 0
+  position: relative
+  -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialiased
+
+  body
+    //@include backgroundPattern
+    background: url(/images/city2.jpg)
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: center
+
+    &:before
+      @include absoluteCover
+      content: ''
+      background: rgba(var(--accent-rgb), .15)
+      transition: background .3s
+
+::selection
+  background: rgba(var(--accent-rgb), .35)
+
+a
+  color: inherit
+  color: var(--accent)
+  text-decoration: none
+
+*
+  box-sizing: border-box
+
+#__next
+  position: relative
+  display: flex
+  flex-direction: column
+  height: -webkit-fill-available
+  box-sizing: border-box
+
+
+div[data-gradient]
+  @include bgGradientY
+  display: block
+  width: 1px
+  height: 100%
+  position: absolute
+  left: 0
+  top: 0
+  border: none

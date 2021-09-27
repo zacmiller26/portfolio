@@ -1,0 +1,26 @@
+@import ../../../styles/sass/mixins
+@import ../../../styles/sass/vars
+
+.submitBtn
+  @include buttonReset
+  background: var(--accent)
+  display: flex
+  flex: 1
+  width: 100%
+  padding: .35rem
+  border-radius: 1rem
+  text-align: center
+  justify-content: center
+  align-items: center
+  box-sizing: border-box
+  color: var(--background-tertiary)
+  font-weight: 500
+  font-size: .9rem
+  transition: opacity .3s
+  margin-top: $spacing
+
+  &:hover
+    background: rgba(var(--accent-rgb), .8)
+
+  &:disabled
+    opacity: .5

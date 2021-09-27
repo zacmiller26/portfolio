@@ -1,0 +1,70 @@
+@import ../../../styles/sass/animations
+@import ../../../styles/sass/vars
+
+
+.root
+  display: flex
+  flex-direction: column
+  width: 380px
+  height: 100vh
+  box-shadow: 1px 0 1px rgba(var(--background-secondary-rgb), .7)
+
+  .profilePic
+    padding: $spacing 0
+    display: flex
+    align-items: center
+    justify-content: center
+    overflow: hidden
+    position: relative
+    background: var(--background-secondary)
+
+    img
+      border-radius: 100%
+      width: 200px
+      height: 200px
+      transition: opacity .5s
+      animation: fadeIn 6s forwards infinite
+      animation-iteration-count: 1
+
+      &:hover
+        opacity: .2
+
+
+  .profileTitle
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    padding-bottom: $spacing
+    background: var(--background-secondary)
+
+    h3
+      font-size: 2rem
+      font-weight: 600
+
+    h2
+      color: var(--text-muted)
+      margin-top: $spacing * .25
+
+      em
+        color: var(--text-jaded)
+
+  .main
+    flex: 1
+    display: flex
+    flex-direction: column
+
+    >div:last-child
+      flex: 1
+      background: var(--background-secondary)
+
+  .footer
+    background: var(--background-secondary)
+
+
+
+@keyframes fadeIn
+  0%
+    opacity: 0
+  100%
+    opacity: 1

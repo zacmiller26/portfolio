@@ -1,0 +1,67 @@
+@import ../../../styles/sass/mixins
+@import ../../../styles/sass/vars
+
+$paddingY: .5rem
+$paddingX: .8rem
+$buffer: .5rem
+.root
+  display: flex
+  flex-direction: column
+  margin: 0 0 $buffer
+
+  &[data-hidden="true"]
+    display: none
+
+  &[data-readonly="true"] input
+    border-color: rgba(var(--background-secondary-rgb), .5)
+    background: rgba(var(--background-secondary-rgb), .5)
+    color: var(--text-muted)
+
+    &:hover
+      cursor: default
+
+
+  label
+    margin: 0 0 $buffer
+    color: var(--text-muted)
+    font-size: .85rem
+
+  textarea
+    @include inputReset
+    border: 2px solid rgba(var(--accent-rgb), .85)
+    display: flex
+    flex: 1
+    padding: $paddingY $paddingX
+    border-radius: 1rem
+    resize: none
+    overflow-y: scroll
+    font-size: .9rem
+    font-weight: 300
+    transition: box-shadow .3s, border-color .3s
+
+    &[data-flat="true"]
+      border-radius: 0
+      border-width: 1px
+
+    &::placeholder
+      font-size: .9em
+      transition: color .3s
+
+    &[data-active="true"]
+      border-color: rgba(var(--accent-rgb), 1)
+      box-shadow: 0 4px 8px 2px rgba(var(--accent-rgb), .05)
+      background: rgba(var(--background-primary-rgb), .5)
+
+      &::placeholder
+        color: var(--accent)
+
+  span.helpText
+    display: block
+    margin: .5rem 0 0
+    font-size: .8rem
+    color: var(--text-muted)
+    margin: $buffer 0 0 $paddingX
+
+@include for-size(mobile)
+  .root input
+    font-size: 1rem

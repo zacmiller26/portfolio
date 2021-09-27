@@ -1,0 +1,86 @@
+@import ../../../styles/sass/mixins
+@import ../../../styles/sass/vars
+
+@mixin invertedCorner($x, $y)
+  width: 2rem
+  height: 2rem
+  position: absolute
+  border-radius: 1rem
+  box-shadow: $x $y 1px var(--background-secondary)
+  z-index: 2
+
+.root
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+  padding: 0
+
+  >div:nth-child(1), >div:nth-child(3)
+    height: $spacing * 2
+    background: var(--background-secondary)
+    width: 100%
+
+  >div:nth-child(2)
+    display: flex
+    width: 100%
+    overflow: hidden
+
+    >div
+      width: $spacing * 2
+      background: var(--background-secondary)
+
+    nav
+      @include blurBg(10px)
+      background: rgba(var(--background-tertiary-rgb), .3)
+      overflow: hidden
+      display: flex
+      flex-direction: column
+      position: relative
+      flex: 1
+
+      i:nth-child(1)
+        @include invertedCorner(-1rem, -1rem)
+        top: 0
+        left: 0
+
+      i:nth-child(2)
+        @include invertedCorner(1rem, -1rem)
+        top: 0
+        right: 0
+
+      i:nth-child(3)
+        @include invertedCorner(1rem, 1rem)
+        bottom: 0
+        right: 0
+
+      i:nth-child(4)
+        @include invertedCorner(-1rem, 1rem)
+        bottom: 0
+        left: 0
+
+      >div
+        display: flex
+        flex-direction: column
+        position: relative
+        flex: 1
+        border-radius: 1rem
+        overflow: hidden
+        padding: 1rem
+
+      a
+        padding: $spacing * .35 $spacing * .5
+        display: inline-block
+        flex: 1
+        color: var(--text-jaded)
+        transition: color .2s, background .2s
+        font-weight: 600
+        z-index: 3
+        border-radius: 1rem
+
+        &:hover
+          color: var(--text-normal)
+
+        &[data-active="true"]
+          color: var(--text-normal)
+          background: rgba(var(--background-secondary-rgb), .45)
