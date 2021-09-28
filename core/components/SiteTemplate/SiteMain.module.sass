@@ -12,13 +12,14 @@ $br: .25rem
   justify-content: center
 
   >div
+    $size: 86%
     @include blurBg(15px)
     background: rgba(255, 255, 255, .05)
     padding: $spacing * .25
     box-shadow: 0 1px 4px rgba(var(--background-secondary-rgb), .5)
     border-radius: $br
-    height: 70%
-    width: 70%
+    height: $size
+    width: $size
 
     >div
       flex: 1

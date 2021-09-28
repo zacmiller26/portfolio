@@ -1,0 +1,74 @@
+@import ../../../styles/sass/mixins
+@import ../../../styles/sass/vars
+
+
+$padding: .4rem
+$br: 1rem
+.root
+  display: flex
+  position: relative
+  background: var(--background-secondary)
+  padding: $padding
+  border-radius: $br
+
+  .column
+    flex: 1
+    width: 100%
+    background: var(--background-primary)
+    margin-right: $padding
+    height: 100%
+    border-radius: $br
+
+    &:last-child
+      margin-right: 0
+
+    .header
+      display: flex
+      align-items: center
+      padding: $spacing * .65
+      background: rgba(var(--background-secondary-rgb), .9)
+      margin: $padding $padding 0
+      font-size: .95rem
+      font-weight: 600
+      color: var(--accent)
+      border-radius: $br $br 0 0
+      text-align: center
+
+      h2
+        flex: 1
+
+        em
+          font-weight: 300
+          color: var(--text-jaded)
+
+      button
+        $size: 2rem
+        @include buttonReset
+        border: 2px solid var(--accent)
+        width: $size
+        height: $size
+        display: flex
+        align-items: center
+        justify-content: center
+        border-radius: 100%
+
+    .tasks
+      position: relative
+      display: flex
+      flex-direction: column
+      min-height: ($spacing * 3) + 2 + ($padding * 2) + ($padding * 2)
+      padding: $padding
+      margin: 0 $padding $padding
+      background: rgba(var(--background-secondary-rgb), .3)
+      border-radius: 0 0 $br $br
+      border: 2px dashed transparent
+      transition: border-color .1s, background .1s
+
+      .task
+        padding: $spacing * .5
+        background: var(--background-tertiary)
+        margin-bottom: $padding
+        border-radius: $br
+        font-size: .85rem
+        line-height: 1rem
+        box-shadow: 2px 2px 1px rgba(var(--background-secondary-rgb), .8)

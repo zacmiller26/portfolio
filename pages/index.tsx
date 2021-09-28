@@ -7,9 +7,14 @@ import ApiDictionary from '../core/components/ApiDictionary/ApiDictionary'
 import ApiRegex from '../core/components/ApiRegex/ApiRegex'
 import KanBan from '../core/components/KanBan/KanBan'
 import CustomTheme from '../core/components/CustomTheme/CustomTheme'
+import NexusTBCBuild from '../core/components/Nexus/nexus-tbc-builds'
+import NexusBasicTable from '../core/components/Nexus/nexus-basic-table'
+import BoltSVG from '../core/vectors/Bolt'
+import BrightnessSVG from '../core/vectors/Brightness'
 import CodeSVG from '../core/vectors/Code'
 import GearSVG from '../core/vectors/Gear'
 import ToolSVG from '../core/vectors/Tool'
+import TableSVG from '../core/vectors/Table'
 import LogoGithubSVG from '../core/vectors/LogoGithub'
 import SiteTemplate from '../core/components/SiteTemplate/SiteTemplate'
 import styles from '../styles/pages/index.module.sass'
@@ -67,12 +72,40 @@ const CODE_EXAMPLES: CodeExampleType[] = [
       'React', 'Context API', 'TypeScript', 'LocalStorage', 'SASS',
       'CSS Properties'
     ],
-    icon: <ToolSVG />,
+    icon: <BrightnessSVG />,
     logos: [GearSVG],
     url: 'https://github.com/felfire/regex-url',
     summary: "This example uses LocalStorage, React's Context API, and Custom "+
     "CSS Properties to create a customizable site theme.",
     renderComponent: () => <CustomTheme />
+  },
+  {
+    name: 'Game Widget',
+    description: 'Interactive Game UX with strict logic',
+    tags: [
+      'React', 'Context API', 'TypeScript', 'LocalStorage', 'SASS',
+      'CSS Properties'
+    ],
+    icon: <BoltSVG />,
+    logos: [GearSVG],
+    url: 'https://github.com/felfire/regex-url',
+    summary: "This example uses LocalStorage, React's Context API, and Custom "+
+    "CSS Properties to create a customizable site theme.",
+    renderComponent: () => <NexusTBCBuild />
+  },
+  {
+    name: 'JSON Table',
+    description: 'Adjustable Table Rows/Cols Stored in JSON',
+    tags: [
+      'React', 'Context API', 'TypeScript', 'LocalStorage', 'SASS',
+      'CSS Properties'
+    ],
+    icon: <TableSVG />,
+    logos: [TableSVG],
+    url: 'https://github.com/felfire/regex-url',
+    summary: "This example uses LocalStorage, React's Context API, and Custom "+
+    "CSS Properties to create a customizable site theme.",
+    renderComponent: () => <NexusBasicTable />
   },
   /*{
     name: 'Sending Emails',
