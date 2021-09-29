@@ -1,6 +1,8 @@
 @import .../../styles/sass/mixins
 @import ../../styles/sass/vars
 
+$maxWidth: 500px
+$br: .5rem
 @mixin modalAttrs
   @include blurBg(14px, rgba(var(--background-secondary-rgb), .95))
   position: fixed
@@ -37,48 +39,126 @@
 
     .header
       width: 100%
+      height: 100%
       padding: $spacing
       display: flex
+      flex: 1
 
       >div
         flex: 1
 
         &.headerCenter
           flex: 4
+          max-width: $maxWidth
+          display: flex
+          align-items: flex-end
 
           h2
             font-size: 1.6rem
             font-weight: 600
+            flex: 1
 
           p
             font-size: 1.2rem
             color: var(--text-muted)
             margin: $spacing * .25 0 0
 
+          button
+            @include buttonReset
+            background: var(--background-primary)
+            padding: .5rem 1rem
+            font-size: .9rem
+            border-radius: $br
+            font-weight: 500
+            position: relative
+
+            &:hover
+              background: var(--background-tertiary)
+              color: var(--accent)
+
         &.headerRight
           display: flex
           justify-content: flex-end
 
+          button.closeBtn
+            $size: 1.2rem
+            @include buttonReset
+            height: $size
+            width: $size
+            box-sizing: content-box
+            padding: .75rem
+            display: block
+            color: var(--accent)
+            border: 2px solid var(--accent)
+            border-radius: $size * 2
+
+            svg
+              height: $size
+              width: $size
+
+              *
+                fill: var(--accent)
+
 
     .contentContainer
       position: relative
-      flex: 1
+      flex: 2
       display: flex
-      animation: popUpFromDeepSouth .35s forwards infinite
-      animation-iteration-count: 1
+      width: 100%
+      max-width: $maxWidth
+      margin: 0 auto
 
       >div
         flex: 1
+        overflow-y: scroll
 
-        &:nth-child(2)
-          flex: 4
-          overflow-y: scroll
+        .content
+          @include blurBg(10px)
+          position: relative
+          padding: $spacing
+          background: rgba(var(--background-primary-rgb), .85)
+          border-radius: $br $br 0 0
 
-          .content
-            position: relative
-            padding: $spacing
-            background: var(--background-primary)
-            box-shadow: 0 2px 20px rgba(0, 0, 0, .25)
+        .footer
+          @include blurBg(10px)
+          background: rgba(var(--background-secondary-rgb), .85)
+          padding: $spacing * .35
+          display: flex
+          align-items: center
+          justify-content: center
+          border-radius: 0 0 $br $br
+
+          >div
+            flex: 1
+            display: flex
+
+            &:last-child
+              justify-content: flex-end
+
+              button
+                background: none
+                color: var(--text-jaded)
+                box-shadow: none !important
+
+                &:hover
+                  color: var(--accent)
+
+          button
+            @include buttonReset
+            color: var(--text-jaded)
+            font-size: .9rem
+            font-weight: 600
+            background: var(--accent)
+            border-radius: $br
+            padding: .5rem 1rem
+            color: var(--background-secondary)
+            transition: box-shadow .3s
+
+            &:hover
+              box-shadow: 0 0 12px rgba(var(--accent-rgb), .5)
+
+          &:empty
+            padding: 0
 
 @keyframes popUpFromDeepSouth
   0%

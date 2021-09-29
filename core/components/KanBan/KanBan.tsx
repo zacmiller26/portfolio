@@ -2,6 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { v4 as uuidv4 } from 'uuid'
 
+import Modal from '../../modals/Modal'
+import TextArea from '../formComponents/TextArea'
+import usePortal from '../../hooks/usePortal'
 import styles from './KanBan.module.sass'
 
 interface TaskType {
@@ -65,10 +68,37 @@ const KanBan: React.FC<Props> = () => {
   const [tasks, setTasks] = useState<TaskStateType>(DEFAULT_STATE)
 
   const addTask = useCallback((colIndex: number, newTask: TaskType) => {
-    const newTasks = [...tasks]
-    newTasks[colIndex] = [...newTasks[colIndex], newTask]
-    setTasks(newTasks)
-  }, [tasks])
+    setTasks(prev => {
+      const newTasks = [...prev]
+      newTasks[colIndex] = [...newTasks[colIndex], newTask]
+      return newTasks
+    })
+  }, [])
+
+  const removeTask = useCallback((colIndex: number, id: string) => {
+    setTasks(prev => {
+      const newTasks = [...prev]
+      const colTasks = newTasks[colIndex]
+      const index = colTasks.findIndex(t => t.id === id)
+      newTasks[colIndex] = [
+        ...colTasks.slice(0, index),
+        ...colTasks.slice(index + 1, colTasks.length)
+      ]
+      return newTasks
+    })
+  }, [])
+
+  const updateTask = useCallback(
+    (colIndex: number, id: string, content: string) => {
+
+    setTasks(prev => {
+      const newTasks = [...prev]
+      const index = newTasks[colIndex].findIndex(t => t.id === id)
+      newTasks[colIndex][index].content = content
+      return newTasks
+    })
+    // update
+  }, [])
 
   const onDragEnd = (result: any) => {
 
@@ -113,7 +143,6 @@ const KanBan: React.FC<Props> = () => {
         newState[newDestinationId] = newTasks[newDestinationId]
         return newState//.filter(group => group.length)
 
-
       })
 
     }
@@ -131,6 +160,8 @@ const KanBan: React.FC<Props> = () => {
             id={index}
             label={labels[index]}
             addTask={addTask}
+            removeTask={removeTask}
+            updateTask={updateTask}
             tasks={colTasks}
           />
         ))}
@@ -141,12 +172,17 @@ const KanBan: React.FC<Props> = () => {
 
 interface ColumnProps {
   addTask: Function
+  removeTask: Function
+  updateTask: Function
   id: number
   label: string
   tasks: TaskType[]
 }
 
 const KanBanTaskColumn: React.FC<ColumnProps> = props => {
+
+  const [task, setTask] = useState<null | TaskType>(null)
+  const [textareaVal, setTextareaVal] = useState('')
 
   const getListStyle = (isDraggingOver: boolean) => ({
     background: isDraggingOver ? 'rgba(var(--accent-rgb), .1)' : undefined,
@@ -157,49 +193,131 @@ const KanBanTaskColumn: React.FC<ColumnProps> = props => {
     userSelect: 'none',
     background: isDragging ? 'var(--accent)' : undefined,
     color: isDragging ? 'var(--background-secondary)' : undefined,
+    position: isDragging ? 'fixed' : undefined,
     ...draggableStyle,
   })
 
+  useEffect(() => {
+    if(task === null) setTextareaVal('')
+    else setTextareaVal(task.content)
+  }, [task])
+
   return (
-    <div className={styles.column}>
-      <div className={styles.header}>
-        <h2>{props.label} <em>({props.tasks.length})</em></h2>
-        <button type="button" onClick={() => {
-          props.addTask(props.id, { id: uuidv4(), content: 'Hello mate' })
-        }}>+</button>
+    <>
+      <div className={styles.column}>
+        <div className={styles.header}>
+          <h2>{props.label} <em>({props.tasks.length})</em></h2>
+          <button type="button" onClick={() => {
+            const newTask = { id: uuidv4(), content: '' }
+            props.addTask(props.id, newTask)
+            setTask(newTask)
+          }}>+</button>
+        </div>
+        <Droppable droppableId={props.id.toString()} direction="vertical">
+          {(provided, snapshot) => (
+            <div
+              className={styles.tasks}
+              ref={provided.innerRef}
+              style={getListStyle(snapshot.isDraggingOver)}
+              {...provided.droppableProps}
+            >
+              {props.tasks.map((item, index) => (
+                <Draggable key={item.id} draggableId={item.id} index={index}>
+                  {(provided, snapshot) => (
+                    <PortalAwareTask isDragging={snapshot.isDragging}>
+                      <div
+                        className={styles.task}
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={getItemStyle(
+                          snapshot.isDragging,
+                          provided.draggableProps.style
+                        )}
+                      >
+                        <span>
+                          {item.content}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setTask(item)}
+                        >
+                          Edit
+                        </button>
+                      </div>
+                    </PortalAwareTask>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
       </div>
-      <Droppable droppableId={props.id.toString()} direction="vertical">
-        {(provided, snapshot) => (
-          <div
-            className={styles.tasks}
-            ref={provided.innerRef}
-            style={getListStyle(snapshot.isDraggingOver)}
-            {...provided.droppableProps}
-          >
-            {props.tasks.map((item, index) => (
-              <Draggable key={item.id} draggableId={item.id} index={index}>
-                {(provided, snapshot) => (
-                  <div
-                    className={styles.task}
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    style={getItemStyle(
-                      snapshot.isDragging,
-                      provided.draggableProps.style
-                    )}
-                  >
-                    {item.content}
-                  </div>
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </div>
+      {task !== null && <Modal
+        title={
+          task.content.length > 1 ?
+          `Edit Task`: `New Task in ${props.label}`
+        }
+        close={() => setTask(null)}
+        isOpen={(task !== null)}
+        footer={
+          <>
+            <div>
+              <button
+                type="button"
+                onClick={() => {
+                  props.updateTask(props.id, task.id, textareaVal)
+                  setTask(null)
+                }}>
+                Save Changes
+              </button>
+            </div>
+            <div>
+              <button
+                type="button"
+                onClick={() => {
+                  props.removeTask(props.id, task.id)
+                  setTask(null)
+                }}
+              >
+                Delete Task
+              </button>
+            </div>
+          </>
+        }
+      >
+        <TextArea
+          onChange={e => {
+            if(e?.currentTarget?.value) {
+              setTextareaVal(e.currentTarget.value)
+            }
+          }}
+          focusOnInit={true}
+          minRows={1}
+          placeholder="Details about your task!"
+          value={textareaVal}
+          name="task-content"
+          id="id-task-content"
+        />
+      </Modal>}
+    </>
   )
+
+}
+
+interface PortalTaskProps {
+  children: React.ReactNode
+  isDragging: boolean
+}
+
+const PortalAwareTask: React.FC<PortalTaskProps> = props => {
+
+  const { makePortal } = usePortal()
+
+  return props.isDragging ? (
+    <>{makePortal(props.children)}</>
+  ) : <>{props.children}</>
 
 }
 

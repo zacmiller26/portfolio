@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import autosize from 'autosize'
 
 import styles from './TextArea.module.sass'
 
@@ -39,7 +40,6 @@ const Input: React.FC<Props> = props => {
 
 export const InputElement: React.FC<Props> = props => {
 
-
   const [active, setActive] = useState(false)
   const ref = useRef<null | HTMLTextAreaElement>(null)
 
@@ -48,6 +48,10 @@ export const InputElement: React.FC<Props> = props => {
       ref.current.focus()
     }
   }, [props.focusOnInit])
+
+  useEffect(() => {
+    ref?.current && autosize(ref.current)
+  }, [ref, props.value])
 
   return (
     <textarea
@@ -64,7 +68,6 @@ export const InputElement: React.FC<Props> = props => {
       required={props.required}
       data-active={active}
       data-flat={props.flat ? true : false}
-      rows={props.minRows}
       ref={ref}
     />
   )

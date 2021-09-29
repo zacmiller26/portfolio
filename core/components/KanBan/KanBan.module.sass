@@ -44,13 +44,14 @@ $br: 1rem
       button
         $size: 2rem
         @include buttonReset
-        border: 2px solid var(--accent)
+        background: var(--accent)
         width: $size
         height: $size
         display: flex
         align-items: center
         justify-content: center
         border-radius: 100%
+        color: var(--background-secondary)
 
     .tasks
       position: relative
@@ -64,11 +65,35 @@ $br: 1rem
       border: 2px dashed transparent
       transition: border-color .1s, background .1s
 
+    &:last-child
+
       .task
-        padding: $spacing * .5
-        background: var(--background-tertiary)
-        margin-bottom: $padding
-        border-radius: $br
-        font-size: .85rem
-        line-height: 1rem
-        box-shadow: 2px 2px 1px rgba(var(--background-secondary-rgb), .8)
+        opacity: .25
+
+
+.task
+  margin-bottom: $padding
+  font-size: .85rem
+  font-weight: 500
+  line-height: 1rem
+  padding: $spacing * .5
+  background: rgba(var(--background-tertiary-rgb), .75)
+  border-radius: $br
+  box-shadow: 2px 2px 1px rgba(var(--background-secondary-rgb), .8)
+  display: flex
+  white-space: pre-line
+
+  >span
+    flex: 1
+
+    &:empty:before
+      content: "Edit to add task details"
+      color: var(--text-muted)
+      font-weight: 300
+
+  button
+    @include buttonReset
+    font-size: .85rem
+    line-height: 1rem
+    color: var(--accent)
+    text-transform: lowercase

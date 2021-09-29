@@ -38,6 +38,9 @@ const Modal: React.FC<Props> = props => {
           <div className={styles.headerCenter}>
             {props.title && <h2>{props.title}</h2>}
             {props.description && <p>{props.description}</p>}
+            <button type="button" onClick={props.close}>
+              Close
+            </button>
           </div>
           <div className={styles.headerRight}>
             {props.close &&
@@ -52,17 +55,16 @@ const Modal: React.FC<Props> = props => {
           </div>
         </div>
         <div className={styles.contentContainer}>
-          <div />
           <div>
             <div className={styles.content}>
               {props.children}
             </div>
+            <div className={styles.footer}>
+              {props.footer}
+            </div>
           </div>
-          <div />
         </div>
-        <div className={styles.footer}>
-          {props.footer}
-        </div>
+
       </div>
 
     </div>,

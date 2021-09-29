@@ -43,12 +43,16 @@ export function SiteThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if(THEME_OPTIONS.includes(theme)) {
       document.documentElement?.setAttribute("data-theme", theme)
+    } else {
+      document.documentElement?.setAttribute("data-theme", THEME_OPTIONS[0])
     }
   }, [theme])
 
   useEffect(() => {
     if(ACCENT_OPTIONS.includes(accent)) {
       document.documentElement?.setAttribute("data-accent", accent)
+    } else {
+      document.documentElement?.setAttribute("data-accent", ACCENT_OPTIONS[0])
     }
   }, [accent])
 
