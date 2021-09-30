@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo } from 'react'
 
-import { useAuth } from '../../contexts/authUser'
 import SiteMenu from './SiteMenu'
 import ThemeBar from './ThemeBar'
 import styles from './SiteSidebar.module.sass'

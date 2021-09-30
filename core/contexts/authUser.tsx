@@ -1,11 +1,7 @@
 import React, {
   createContext, useCallback, useContext, useEffect, useState
 } from 'react'
-
-import app from '../lib/firebase.config'
-
 import {
-  getAuth,
   EmailAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -17,10 +13,8 @@ import {
 } from "firebase/auth"
 import { useRouter } from 'next/router'
 
+import auth from '../lib/firebase.auth'
 const authUserContext = createContext<Partial<any>>({})
-
-/* TODO: fix this */
-const auth = app ? getAuth() : null
 
 export interface FirebaseAuthUserType {
   displayName: string | null

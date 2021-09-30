@@ -110,6 +110,20 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     "CSS Properties to create a customizable site theme.",
     renderComponent: () => <AuthLogin />
   },
+  {
+    name: 'Membership Subscriptions',
+    description: 'Stripe Subscription Products',
+    tags: [
+      'React', 'Stripe', 'Subscriptions', 'Firebase', 'TypeScript', 'LocalStorage', 'SASS',
+      'CSS Properties'
+    ],
+    icon: <TableSVG />,
+    logos: [TableSVG],
+    url: 'https://github.com/felfire/regex-url',
+    summary: "This example uses LocalStorage, React's Context API, and Custom "+
+    "CSS Properties to create a customizable site theme.",
+    renderComponent: () => <AuthLogin />
+  },
   /*{
     name: 'Sending Emails',
     description: 'Python / Django / DRF / API',

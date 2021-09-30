@@ -14,19 +14,8 @@ const CodePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <SiteTemplate header={<h1>Contact</h1>}>
-        <Bubble>
-          {process.env.NEXT_PUBLIC_CONTACT_EMAIL}
-        </Bubble>
-        <Bubble>
-          {process.env.NEXT_PUBLIC_CONTACT_PHONE}
-        </Bubble>
-        <Bubble>
-          {process.env.NEXT_PUBLIC_IG_PROFILE}
-        </Bubble>
-        <Bubble>
-          {process.env.NEXT_PUBLIC_GITHUB_PROFILE}
-        </Bubble>
+      <SiteTemplate header={<h1>About</h1>}>
+        Zac attack
       </SiteTemplate>
 
     </>

@@ -21,13 +21,13 @@ const SiteMenu: React.FC<Props> = () => {
         <nav>
           <i /><i /><i /><i />
           <div>
-            <Link href="/">
+            <Link href="/about">
               <a data-active={router.asPath === '/about'}>About</a>
             </Link>
             <Link href="/">
               <a data-active={router.asPath === '/'}>Code Examples</a>
             </Link>
-            <Link href="/">
+            <Link href="/contact">
               <a data-active={router.asPath === '/contact'}>Contact</a>
             </Link>
           </div>
