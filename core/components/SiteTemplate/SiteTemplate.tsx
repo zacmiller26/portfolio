@@ -7,6 +7,7 @@ import styles from './SiteTemplate.module.sass'
 
 
 interface Props {
+  header?: React.ReactNode
   children: React.ReactNode
 }
 
@@ -14,17 +15,9 @@ const SiteTemplate: React.FC<Props> = props => {
   return (
     <div className={styles.root}>
 
-      {/*<Container>
-        <ThemeBar />
-      </Container>
-
-      <Header />
-
-      <SiteMenu />*/}
-
       <SiteSidebar />
 
-      <SiteMain>
+      <SiteMain header={props.header}>
         {props.children}
       </SiteMain>
 

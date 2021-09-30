@@ -24,7 +24,8 @@ const SiteSidebar: React.FC<Props> = () => {
 
       <div className={styles.profilePic}>
         <div>
-          <img src="/images/thumbnail.png" />
+          {//<img src="/images/thumbnail.png" />
+          }
         </div>
       </div>
 

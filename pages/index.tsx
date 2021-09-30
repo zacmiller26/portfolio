@@ -115,29 +115,8 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     renderComponent: () => <><LogoDjangoSVG />OMG its an API!</>
   },
   {
-    name: 'Input Regex',
-    description: 'Python / Django / DRF / API',
-    summary: "This project demonstrates my ability to replicate a "+
-    "given design. I chose Twitter because it's widely used and a fun design.",
-    renderComponent: () => <>OMG its KanBan!</>
-  },
-  {
-    name: 'Dictionary Word Lookup',
-    description: 'Python / Django / DRF / API',
-    summary: "This project demonstrates my ability to replicate a "+
-    "given design. I chose Twitter because it's widely used and a fun design.",
-    renderComponent: () => <>OMG its KanBan!</>
-  },
-  {
     name: 'Image Crop & Resize',
     description: 'AWS / S3 / Python / Django / DRF / API',
-    summary: "This project demonstrates my ability to replicate a "+
-    "given design. I chose Twitter because it's widely used and a fun design.",
-    renderComponent: () => <>OMG its KanBan!</>
-  },
-  {
-    name: 'KanBan Task Manager',
-    description: 'React / LocalStorage',
     summary: "This project demonstrates my ability to replicate a "+
     "given design. I chose Twitter because it's widely used and a fun design.",
     renderComponent: () => <>OMG its KanBan!</>
@@ -185,10 +164,16 @@ const CodePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <SiteTemplate>
-        {!project ?
-          <ProjectList setProjectIndex={setProjectIndex} />
-          :
+      <SiteTemplate header={
+        !project ?
+          <div className={styles.codeExampleDetail}>
+            <div className={styles.breadcrumb}>
+              <div>
+                <h4>Code Examples</h4>
+              </div>
+            </div>
+          </div>
+         :
           <div className={styles.codeExampleDetail}>
             <div className={styles.breadcrumb}>
               <div>
@@ -207,19 +192,14 @@ const CodePage: NextPage = () => {
                 ))}
               </ul>
             </div>
-            {projectComponent}
           </div>
+      }>
+        {!project ?
+          <ProjectList setProjectIndex={setProjectIndex} />
+          :
+          projectComponent
         }
       </SiteTemplate>
-
-      {/*<Modal
-        title={project?.name}
-        description={project?.summary}
-        close={() => setProjectIndex(null)}
-        isOpen={(projectIndex !== null)}
-      >
-        {projectComponent}
-      </Modal>*/}
 
     </>
 

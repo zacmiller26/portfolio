@@ -12,6 +12,7 @@ ul.codeExampleList
     display: block
     margin: 0 $spacing * .5 $spacing * .5 0
     min-width: 30%
+    overflow: auto
 
     &:nth-child(4n+4)
       min-width: 100%
@@ -29,9 +30,10 @@ ul.codeExampleList
       align-items: center
       justify-content: center
       background: rgba(var(--background-tertiary-rgb), .6)
-      padding: 0 $buffer $buffer
+      padding: (1rem + (2rem)) $buffer $buffer
       margin-top: $offset
       border-radius: .5rem
+      position: relative
 
       &:hover, &[data-active="true"]
         background: rgba(var(--background-tertiary-rgb), 1)
@@ -45,7 +47,9 @@ ul.codeExampleList
         padding: 1rem
         border-radius: 100%
         overflow: hidden
-        margin: - $offset 0 $buffer * .5
+        top: - $offset
+        margin: 0 0 $buffer * .5
+        position: absolute
         background: var(--background-secondary)
 
         svg
@@ -71,14 +75,10 @@ div.codeExampleDetail
 
   .breadcrumb
     display: block
-    border-bottom: 1px dashed var(--background-tertiary)
-    padding: 0 0 $spacing
-    margin: 0 0 $spacing
 
     >div
       display: flex
       align-items: center
-      margin: 0 0 $spacing * .75
 
       button
         @include buttonReset
@@ -120,7 +120,7 @@ div.codeExampleDetail
       color: var(--text-muted)
       font-size: .95rem
       font-weight: 300
-      margin: 0 0 $spacing * .75
+      margin: $spacing * .5 0 $spacing * .75
 
     ul
       display: flex
