@@ -4,7 +4,7 @@ import Head from 'next/head'
 import { useMemo, useState } from 'react'
 
 import ApiDictionary from '../core/components/ApiDictionary/ApiDictionary'
-import ApiRegex from '../core/components/ApiRegex/ApiRegex'
+import AuthLogin from '../core/components/AuthLogin/AuthLogin'
 import KanBan from '../core/components/KanBan/KanBan'
 import CustomTheme from '../core/components/CustomTheme/CustomTheme'
 import NexusTBCBuild from '../core/components/Nexus/nexus-tbc-builds'
@@ -42,17 +42,6 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     summary: "This sends a POST request to a Django DRF API "+
     "that returns a PyDictionary lookup.",
     renderComponent: () => <ApiDictionary />
-  },
-  {
-    name: 'Python Regex',
-    description: 'REST API Python Logic',
-    tags: ['Python', 'Django', 'DRF', 'API'],
-    icon: <GearSVG />,
-    logos: [GearSVG],
-    url: 'https://github.com/felfire/regex-url',
-    summary: "This sends a POST request to a Django DRF API "+
-    "that returns a PyDictionary lookup.",
-    renderComponent: () => <ApiRegex />
   },
   {
     name: 'KanBan Tasks',
@@ -106,6 +95,20 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     summary: "This example uses LocalStorage, React's Context API, and Custom "+
     "CSS Properties to create a customizable site theme.",
     renderComponent: () => <NexusBasicTable />
+  },
+  {
+    name: 'User Login',
+    description: 'User Authentication & Sessions',
+    tags: [
+      'React', 'Context API', 'Firebase', 'Authentication', 'TypeScript', 'LocalStorage', 'SASS',
+      'CSS Properties'
+    ],
+    icon: <TableSVG />,
+    logos: [TableSVG],
+    url: 'https://github.com/felfire/regex-url',
+    summary: "This example uses LocalStorage, React's Context API, and Custom "+
+    "CSS Properties to create a customizable site theme.",
+    renderComponent: () => <AuthLogin />
   },
   /*{
     name: 'Sending Emails',

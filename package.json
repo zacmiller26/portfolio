@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@types/autosize": "^4.0.0",
+    "@types/firebase": "^3.2.1",
     "@types/lodash": "^4.14.173",
     "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-dom": "^17.0.9",
     "@types/uuid": "^8.3.1",
     "autosize": "^5.0.1",
+    "firebase": "^9.1.0",
     "lodash": "^4.17.21",
     "next": "11.1.2",
     "react": "17.0.2",
