@@ -4,11 +4,13 @@ import Head from 'next/head'
 import { useMemo, useState } from 'react'
 
 import ApiDictionary from '../core/components/ApiDictionary/ApiDictionary'
+import ApiVote from '../core/components/ApiVote/ApiVote'
 import AuthLogin from '../core/components/AuthLogin/AuthLogin'
 import KanBan from '../core/components/KanBan/KanBan'
 import CustomTheme from '../core/components/CustomTheme/CustomTheme'
 import NexusTBCBuild from '../core/components/Nexus/nexus-tbc-builds'
 import NexusBasicTable from '../core/components/Nexus/nexus-basic-table'
+import ScratchNView from '../core/components/ScratchNView/ScratchNView'
 import BoltSVG from '../core/vectors/Bolt'
 import BrightnessSVG from '../core/vectors/Brightness'
 import CodeSVG from '../core/vectors/Code'
@@ -68,7 +70,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     "CSS Properties to create a customizable site theme.",
     renderComponent: () => <CustomTheme />
   },
-  {
+  /*{
     name: 'Game Widget',
     description: 'Interactive Game UX with strict logic',
     tags: [
@@ -81,7 +83,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     summary: "This example uses LocalStorage, React's Context API, and Custom "+
     "CSS Properties to create a customizable site theme.",
     renderComponent: () => <NexusTBCBuild />
-  },
+  },*/
   {
     name: 'JSON Table',
     description: 'Adjustable Table Rows/Cols Stored in JSON',
@@ -123,6 +125,34 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     summary: "This example uses LocalStorage, React's Context API, and Custom "+
     "CSS Properties to create a customizable site theme.",
     renderComponent: () => <AuthLogin />
+  },
+  {
+    name: 'Scratch n\' View',
+    description: 'Scratch off paint to view picture',
+    tags: [
+      'React', 'Stripe', 'Subscriptions', 'Firebase', 'TypeScript', 'LocalStorage', 'SASS',
+      'CSS Properties'
+    ],
+    icon: <TableSVG />,
+    logos: [TableSVG],
+    url: 'https://github.com/felfire/regex-url',
+    summary: "This example uses LocalStorage, React's Context API, and Custom "+
+    "CSS Properties to create a customizable site theme.",
+    renderComponent: () => <ScratchNView />
+  },
+  {
+    name: 'Voting Mechanism',
+    description: 'Vote using a Django API',
+    tags: [
+      'React', 'Stripe', 'Subscriptions', 'Firebase', 'TypeScript', 'LocalStorage', 'SASS',
+      'CSS Properties'
+    ],
+    icon: <TableSVG />,
+    logos: [TableSVG],
+    url: 'https://github.com/felfire/regex-url',
+    summary: "This example uses a Django DRF API to send and store your "+
+    "vote, which utilizes request throttling, rate and total limits to the amount of votes, and shows total voting statistics.",
+    renderComponent: () => <ApiVote />
   },
   /*{
     name: 'Sending Emails',
