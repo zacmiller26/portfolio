@@ -1,3 +1,6 @@
+@import ../../../styles/sass/mixins
+@import ../../../styles/sass/vars
+
 
 .root
   display: flex
@@ -5,13 +8,19 @@
   height: 400px
   width: 100%
   overflow: hidden
-  background: url(/images/thumbnail.png)
+  background: url(/images/neon.jpg)
   background-repeat: no-repeat
   background-size: cover
 
+  &:hover
+    cursor: cell
+
   >div
+    @include blurBg(50px)
     display: block
-    width: 10%
-    height: 10%
-    background: blue
+    background: rgba(var(--accent-rgb), .65)
     box-sizing: border-box
+    transition: opacity .25s, background .1s
+
+    &:hover
+      background: rgba(var(--accent-rgb), .99)

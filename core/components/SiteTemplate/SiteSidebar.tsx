@@ -67,9 +67,9 @@ const SiteSidebar: React.FC<Props> = props => {
         <SiteMenu menuMap={props.menuMap} />
       </div>
 
-      <div className={styles.footer}>
+      {/*<div className={styles.footer}>
         <ThemeBar />
-      </div>
+      </div>*/}
 
       <div className={styles.bottom}>
         {btnDown}

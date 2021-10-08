@@ -72,7 +72,7 @@ const OptionsList: React.FC<OptionsProps> = props => {
           className={styles.optionsList + ' ' + props.className}
           data-top={props.top}
         >
-          {Object.entries(props.options).map(([option, color]) => (
+          {Object.entries(props.options).map(([option, _]) => (
             <li key={option.toString()}>
               <button
                 type="button"
@@ -89,20 +89,5 @@ const OptionsList: React.FC<OptionsProps> = props => {
   )
 
 }
-
-const OptionsListOld: React.FC<OptionsProps> = props => (
-  <ul className={styles.optionsList + ' ' + props.className}>
-    {Object.entries(props.options).map(([option, color]) => (
-      <li key={option.toString()} data-selected={props.selected === option}>
-        <button
-          type="button"
-          onClick={() => props.setOption(option)}
-        >
-          {option}
-        </button>
-      </li>
-    ))}
-  </ul>
-)
 
 export default ThemeBar

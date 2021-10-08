@@ -1,19 +1,31 @@
-@import ../sass/animations
-@import ../sass/mixins
-@import ../sass/vars
+@import ../../styles/sass/animations
+@import ../../styles/sass/mixins
+@import ../../styles/sass/vars
 
 
-.link
+.btn
   $ts: .1s
-  @include fadeIn(2s)
+  @include buttonReset
   position: absolute
   width: 100vw
   height: 100vh
   display: flex
+  top: 0
   align-items: center
   justify-content: center
   font-family: 'Permanent Marker'
   font-size: 5rem
+  background: var(--background-secondary)
+  z-index: 99
+  transition: top 1s, background .5s
+
+  &[data-visible="false"]
+    //@include blurBg(10px)
+    top: -100vh
+    background: rgba(var(--background-secondary-rgb), .8)
+
+  >i
+    position: absolute
 
   span
     margin-right: .85rem
@@ -30,7 +42,7 @@
 
 
 @include for-size(mobile)
-  .link
+  .btn
     flex-direction: column
 
     span

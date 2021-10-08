@@ -1,8 +1,6 @@
 import React from 'react'
-import Link from 'next/link'
 
-//import useViewportMeta from '../../hooks/useViewportMeta'
-import { MenuMapType } from '../../../pages/info'
+import { MenuMapType } from '../../../pages/index'
 import SiteMain from './SiteMain'
 import SiteSidebar from './SiteSidebar'
 import CloseSVG from '../../vectors/Close'
@@ -11,12 +9,11 @@ import styles from './SiteTemplate.module.sass'
 
 interface Props {
   menuMap: MenuMapType
+  goHome: Function
   children: React.ReactNode
 }
 
 const SiteTemplate: React.FC<Props> = props => {
-
-  //const { isMobile } = useViewportMeta()
 
   return (
     <div className={styles.root}>
@@ -27,11 +24,13 @@ const SiteTemplate: React.FC<Props> = props => {
         {props.children}
       </SiteMain>
 
-      <Link href="/">
-        <a className={styles.homeLink}>
-          <CloseSVG />
-        </a>
-      </Link>
+      <button
+        className={styles.homeBtn}
+        type="button"
+        onClick={() => props.goHome()}
+      >
+        <CloseSVG />
+      </button>
 
     </div>
   )

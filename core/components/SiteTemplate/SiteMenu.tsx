@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { MenuMapType } from '../../../pages/info'
+import { MenuMapType } from '../../../pages/index'
 import Container from '../Container'
 import styles from './SiteMenu.module.sass'
 
@@ -17,6 +17,7 @@ const SiteMenu: React.FC<Props> = props => {
           type="button"
           data-active={isActive}
           onClick={() => scrollFn()}
+          key={label}
         >
           {label}
         </button>

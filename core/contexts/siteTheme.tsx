@@ -11,7 +11,7 @@ export interface ThemeOptionsType {
 
 const siteThemeContext = createContext<Partial<any>>({})
 
-const THEME_OPTIONS = ['dark', 'light', 'purple', 'blue']
+const THEME_OPTIONS = ['dark', 'purple', 'blue']
 const ACCENT_OPTIONS = ['blue', 'green', 'orange', 'purple', 'ruby']
 
 export function SiteThemeProvider({ children }: { children: React.ReactNode }) {

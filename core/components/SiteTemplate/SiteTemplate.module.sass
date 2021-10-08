@@ -14,8 +14,9 @@
   main
     flex: 2
 
-  .homeLink
+  .homeBtn
     $size: 1.4rem
+    @include buttonReset
     display: block
     position: fixed
     right: 0
@@ -40,7 +41,7 @@
     flex-direction: column
     height: inherit
 
-    .homeLink
+    .homeBtn
       display: none
 
     aside, main

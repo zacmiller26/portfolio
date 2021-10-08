@@ -39,7 +39,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     tags: ['React', 'Portal', 'Modals', 'TypeScript', 'Next.js', 'Modals'],
     icon: <BoltSVG />,
     logos: [GearSVG],
-    url: 'https://github.com/felfire/regex-url',
+    url: 'https://github.com/felfire/portfolio/blob/main/core/components/KanBan/KanBan.tsx',
     summary: "This CRUD example uses a LocalStorage-based React Hook for "+
     "storing the tasks you create.",
     renderComponent: () => <KanBan />
@@ -50,7 +50,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     tags: ['Python', 'Django', 'DRF', 'API', 'POST'],
     icon: <CodeSVG />,
     logos: [CodeSVG],
-    url: 'https://github.com/felfire/dictionary-url',
+    url: 'https://github.com/felfire/portfolio/blob/main/core/components/ApiDictionary/ApiDictionary.tsx',
     summary: "This sends a POST request to a Django DRF API "+
     "that returns a PyDictionary lookup.",
     renderComponent: () => <ApiDictionary />
@@ -64,7 +64,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     ],
     icon: <BrightnessSVG />,
     logos: [GearSVG],
-    url: 'https://github.com/felfire/regex-url',
+    url: 'https://github.com/felfire/portfolio/blob/main/core/components/SiteTemplate/ThemeBar.tsx',
     summary: "This example uses LocalStorage, React's Context API, and Custom "+
     "CSS Properties to create customizable site theme colors.",
     renderComponent: () => <CustomTheme />
@@ -84,7 +84,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     renderComponent: () => <NexusTBCBuild />
   },*/
   {
-    name: 'JSON Table',
+    name: 'Dynamic Table',
     description: 'Dynamic Table With JSON & CSV Outputs',
     tags: [
       'React', 'Context API', 'TypeScript', 'LocalStorage', 'JSON',
@@ -92,9 +92,10 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     ],
     icon: <TableSVG />,
     logos: [TableSVG],
-    url: 'https://github.com/felfire/regex-url',
-    summary: "This example uses LocalStorage, React's Context API, and Custom "+
-    "CSS Properties to create a customizable site theme.",
+    url: 'https://github.com/felfire/portfolio/blob/main/core/components/Nexus/nexus-basic-table/Tables.tsx',
+    summary: "This example is a dynamic table that can expand in rows and "+
+    "columns up to the preset limit, with tabs to view the JSON or CSV output."+
+    " This uses basic React functionality.",
     renderComponent: () => <NexusBasicTable />
   },
   {
@@ -106,7 +107,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     ],
     icon: <UserSVG />,
     logos: [TableSVG],
-    url: 'https://github.com/felfire/regex-url',
+    url: 'https://github.com/felfire/portfolio/blob/main/core/components/AuthLogin/AuthLogin.tsx',
     summary: "This example uses a Context Hook with all the basic functionality "+
     "for user sessions using Firebase Auth. By using React Context, the "+
     "`authUser` object is readily accessible to any component that needs it.",
@@ -135,9 +136,10 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     ],
     icon: <PenSVG />,
     logos: [TableSVG],
-    url: 'https://github.com/felfire/regex-url',
-    summary: "This example uses LocalStorage, React's Context API, and Custom "+
-    "CSS Properties to create a customizable site theme.",
+    url: 'https://github.com/felfire/portfolio/blob/main/core/components/ScratchNView/ScratchNView.tsx',
+    summary: "This example lets you run your mouse over the image to reveal it."+
+    " A `mouseover` event listener is activated on the panels covering the"+
+    " image, which reduces their opacity to 0 when the event is triggered.",
     renderComponent: () => <ScratchNView />
   },
   /*{

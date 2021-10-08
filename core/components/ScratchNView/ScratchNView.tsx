@@ -1,39 +1,21 @@
-import React, { createRef, useEffect, useState } from 'react'
-import { debounce } from 'lodash'
+import React, { createRef, useEffect } from 'react'
 
 import useArray from '../../hooks/useArray'
 import styles from './ScratchNView.module.sass'
 
 
 interface Props {}
+const PANEL_COUNT = 8
 
 const ScratchNView: React.FC<Props> = () => {
 
-  const [mouseDown, setMouseDown] = useState(false)
-
   const {
-    array: refs, set: setRefs, push, filter, update
-  } = useArray([...Array(10 * 10)].map(() => createRef()))
-
-  useEffect(() => {
-    console.log(mouseDown)
-  }, [mouseDown])
-
-  useEffect(() => {
-    window.addEventListener('mousedown', () => setMouseDown(true))
-    window.addEventListener('mouseup', () => setMouseDown(false))
-    return () => {
-      window.removeEventListener('mousedown', () => setMouseDown(false))
-      window.removeEventListener('mouseup', () => setMouseDown(false))
-    }
-  }, [])
+    array: refs
+  } = useArray([...Array(PANEL_COUNT * PANEL_COUNT)].map(() => createRef()))
 
   useEffect(() => {
 
-    /* TODO: incorporate mousedown */
-    const hideNode = (node: any) => {
-      if(mouseDown) node.style.opacity = 0
-    }
+    const hideNode = (node: any) => node.style.opacity = 0
 
     refs.forEach(ref => {
       const node = ref.current
@@ -43,12 +25,15 @@ const ScratchNView: React.FC<Props> = () => {
       }
     })
 
-  }, [mouseDown, refs])
+  }, [refs])
 
   return (
     <div className={styles.root}>
       {refs.map((ref, i) => {
-        return <div key={i} ref={ref} />
+        return <div key={i} ref={ref} style={{
+          width: `${100/PANEL_COUNT}%`,
+          height: `${100/PANEL_COUNT}%`
+        }} />
       })}
     </div>
   )
