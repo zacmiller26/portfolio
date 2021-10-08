@@ -4,6 +4,7 @@ import React, {
 import autosize from 'autosize'
 import { ComponentProps } from '../nexus-emulator'
 import styles from './Tables.module.sass'
+import JSONPretty from 'react-json-pretty'
 
 
 /*TODO->
@@ -22,6 +23,8 @@ type TableType = string[][]
 const Tables = (props: ComponentProps) => {
 
   const { nexusData } = props
+
+  const [section, setSection] = useState('table')
 
   //const [rows, setRows] = useState(['default'])
   const [table, setTable] = useState<TableType>(
@@ -98,18 +101,67 @@ const Tables = (props: ComponentProps) => {
 
   return (
     <div className={styles.root}>
-      <RenderTable
-        table={table}
-        setTable={setTable}
-        edit={props.isEditor}
-        addTableCol={addTableCol}
-        addTableRow={addTableRow}
-        tableColCount={tableColCount}
-        tableRowCount={tableRowCount}
-        removeTableCol={removeTableCol}
-        removeTableRow={removeTableRow}
-      />
+
+      <div className={styles.sectionMenu}>
+        <button
+          type="button"
+          data-active={section === 'table'}
+          onClick={() => setSection('table')}
+        >
+          Table
+        </button>
+        <button
+          type="button"
+          data-active={section === 'json'}
+          onClick={() => setSection('json')}
+        >
+          JSON Output
+        </button>
+        <button
+          type="button"
+          data-active={section === 'csv'}
+          onClick={() => setSection('csv')}
+        >
+          CSV Output
+        </button>
+      </div>
+
+      {section === 'table' ?
+        <RenderTable
+          table={table}
+          setTable={setTable}
+          edit={props.isEditor}
+          addTableCol={addTableCol}
+          addTableRow={addTableRow}
+          tableColCount={tableColCount}
+          tableRowCount={tableRowCount}
+          removeTableCol={removeTableCol}
+          removeTableRow={removeTableRow}
+        />
+        :
+        section === 'json' ?
+        <JSONPretty
+          id="json-pretty"
+          data={nexusData.table_content}
+          stringStyle={"color: var(--accent); font-style: italic;"}
+          booleanStyle={"color: var(--accent-secondary)"}
+          valueStyle={"color: var(--accent-tertiary)"}
+          errorStyle="color: var(--accent)"
+          keyStyle="font-weight: 500; color: var(--text-jaded)"
+          mainStyle={`
+            font-size: .9rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            line-height: 1.1rem;
+            overflow: scroll
+          `}
+        >
+        </JSONPretty>
+        :
+          table.toString()
+      }
       {props.isEditor && <ListErrors errors={props.nexusDataErrors} />}
+
     </div>
   )
 

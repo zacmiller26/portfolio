@@ -1,4 +1,4 @@
-@import ../../../styles/sass/animations
+@import ../../../styles/sass/mixins
 @import ../../../styles/sass/vars
 
 
@@ -7,64 +7,58 @@
   flex-direction: column
   width: 380px
   height: 100vh
-  box-shadow: 1px 0 1px rgba(var(--background-secondary-rgb), .7)
-
-  .profilePic
-    padding: $spacing 0
-    display: flex
-    align-items: center
-    justify-content: center
-    overflow: hidden
-    position: relative
-    background: var(--background-secondary)
-
-    img
-      border-radius: 100%
-      width: 200px
-      height: 200px
-      transition: opacity .5s
-      animation: fadeIn 6s forwards infinite
-      animation-iteration-count: 1
-
-      &:hover
-        opacity: .2
-
-
-  .profileTitle
-    display: flex
-    flex-direction: column
-    align-items: center
-    justify-content: center
-    padding-bottom: $spacing
-    background: var(--background-secondary)
-
-    h3
-      font-size: 2rem
-      font-weight: 600
-
-    h2
-      color: var(--text-muted)
-      margin-top: $spacing * .25
-
-      em
-        color: var(--text-jaded)
+  overflow-y: scroll
+  position: sticky
+  top: 0
 
   .main
     flex: 1
     display: flex
     flex-direction: column
-
-    >div:last-child
-      flex: 1
-      background: var(--background-secondary)
+    justify-content: center
 
   .footer
     background: var(--background-secondary)
 
+  .arrowBtn
+    $size: 3rem
+    @include buttonReset
+    height: $size
+    width: $size * 2
+    font-size: 1.5rem
+    background: rgba(var(--background-primary-rgb), .5)
+    position: absolute
+    right: 0
+    display: flex
+    align-items: center
+    justify-content: center
+    color: var(--text-jaded)
+    transition: border-color .2s, opacity .2s, color .2s
+    opacity: .5
+    z-index: 99
 
+    &:hover
+      background: rgba(var(--background-primary-rgb), .85)
+      opacity: 1
+      color: var(--accent)
 
-@keyframes fadeIn
-  0%
-    opacity: 0
-  100%
-    opacity: 1
+    &[data-dir="up"]
+      top: 0
+      border-radius: 0 0 $size $size
+
+    &[data-dir="down"]
+      bottom: 0
+      border-radius: $size $size 0 0
+
+@include for-size(mobile)
+  .root
+    display: block
+    height: unset
+    width: unset
+    z-index: 9
+
+    .footer
+      display: none
+
+    .arrowBtn
+      display: none

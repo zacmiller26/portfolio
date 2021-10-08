@@ -1,3 +1,4 @@
+@import ../../../styles/sass/animations
 @import ../../../styles/sass/mixins
 @import ../../../styles/sass/vars
 
@@ -7,39 +8,10 @@ $size: 86%
 
 .root
   position: relative
-  width: 380px
+  height: 100%
   padding: 0
-  display: flex
-  flex-direction: column
-  align-items: center
 
-  div.header
-    background: rgba(255, 255, 255, .05)
-    padding: 0 $spacing * .25 $spacing * .25
-    width: $size
-    margin-bottom: $spacing
-    border-radius: 0 0 $br $br
-    position: sticky
-    top: 0
-    z-index: 2
 
-    >div
-      background: rgba(var(--background-secondary-rgb), .85)
-      padding: $spacing
-      border-radius: 0 0 $br $br
-
-  div.content
-    @include blurBg(15px)
-    background: rgba(255, 255, 255, .05)
-    padding: $spacing * .25
-    box-shadow: 0 1px 4px rgba(var(--background-secondary-rgb), .5)
-    border-radius: $br
-    margin-bottom: $spacing
-    //height: $size
-    width: $size
-
-    >div
-      flex: 1
-      padding: $spacing
-      background: rgba(var(--background-secondary-rgb), .85)
-      border-radius: $br
+@include for-size(mobile)
+  .root
+    height: unset

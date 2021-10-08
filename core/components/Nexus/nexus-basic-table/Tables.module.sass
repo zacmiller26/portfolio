@@ -1,3 +1,4 @@
+@import ../../../../styles/sass/mixins
 @import ../../../../styles/sass/vars
 
 
@@ -6,7 +7,29 @@ $fs: .8rem
 .root
   padding: $spacing
   border-radius: .5rem
-  background: var(--background-secondary)
+  border: 1px solid var(--accent)
+
+  .sectionMenu
+    display: flex
+    margin: 0 0 $spacing
+
+    button
+      @include buttonReset
+      margin: 0 .5rem 0 0
+      padding: .35rem 1rem
+      color: var(--text-jaded)
+      background: var(--background-primary)
+      border-radius: 1rem
+      font-weight: 500
+      font-size: .9rem
+
+      &:hover
+        color: var(--text-normal)
+
+      &[data-active="true"]
+        background: var(--accent)
+        color: var(--background-secondary)
+
 
 .nexusTableRoot
 

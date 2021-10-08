@@ -173,6 +173,9 @@
   @if $size == mobile
     @media (max-width: $mobileMaxWidth)
       @content
+  @else if $size == tablet-and-down
+    @media (max-width: 960px)
+      @content
   @else if $size == tablet-and-up
     @media (min-width: 600px)
       @content

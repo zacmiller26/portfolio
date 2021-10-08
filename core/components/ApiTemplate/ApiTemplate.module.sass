@@ -12,7 +12,7 @@
     >div
       position: relative
       flex: 1
-      background: var(--background-secondary)
+      background: var(--background-primary)
       padding: $spacing
       border-radius: $spacing * .5
 
@@ -25,6 +25,10 @@
         padding: $spacing * .25
         font-weight: 500
         font-size: .95rem
+        transition: color .1s
+        
+        &:hover
+          color: var(--text-jaded)
 
         &[data-active="true"]
           color: var(--accent)

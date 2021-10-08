@@ -16,12 +16,12 @@ type TaskStateType = TaskType[][]
 
 const DEFAULT_STATE: TaskStateType = [
   [
-    { id: uuidv4(), content: 'Review portfolio' },
-    { id: uuidv4(), content: 'Stand up and applaud' },
-    { id: uuidv4(), content: 'Daydream about Zac' },
-    { id: uuidv4(), content: 'Contact Zac' },
-    { id: uuidv4(), content: 'Hire Zac' },
-    { id: uuidv4(), content: 'Succeed in life' },
+    { id: uuidv4(), content: 'Wake up @ 5:30' },
+    { id: uuidv4(), content: 'Make coffee, feed Tegan' },
+    { id: uuidv4(), content: 'Go for a run 🏃🏻‍♂️' },
+    { id: uuidv4(), content: 'Start oatmeal, hop in shower' },
+    { id: uuidv4(), content: 'Load up oatmeal with berries and eat up 😋' },
+    { id: uuidv4(), content: 'Start working ☕️' },
   ],
   [],
   []
@@ -149,8 +149,6 @@ const KanBan: React.FC<Props> = () => {
 
   }
 
-  useEffect(() => {console.log('updated state!', tasks)}, [tasks])
-
   return (
     <div className={styles.root}>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -194,7 +192,7 @@ const KanBanTaskColumn: React.FC<ColumnProps> = props => {
     background: isDragging ? 'var(--accent)' : undefined,
     color: isDragging ? 'var(--background-secondary)' : undefined,
     position: isDragging ? 'fixed' : undefined,
-    ...draggableStyle,
+    ...draggableStyle
   })
 
   useEffect(() => {

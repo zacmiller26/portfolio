@@ -10,18 +10,7 @@ interface Props {
 const SiteMain: React.FC<Props> = props => {
   return (
     <main className={styles.root}>
-
-      {props.header && <div className={styles.header}>
-        <div>
-          {props.header}
-        </div>
-      </div>}
-
-      <div className={styles.content}>
-        <div>
-          {props.children}
-        </div>
-      </div>
+      {props.children}
     </main>
   )
 }

@@ -3,44 +3,33 @@
 
 
 .root
-  padding: $spacing
+  padding: $spacing * .45
   display: flex
   position: relative
 
   .optionsContainer
     position: relative
-    flex: 1
-
-    &:first-child .toggleBtn
-      border-radius: 1rem 0 0 1rem
-      margin-right: 1px
-
-    &:last-child .toggleBtn
-      border-radius: 0 1rem 1rem 0
-      margin-left: 1px
 
     .toggleBtn
       @include buttonReset
-      background: var(--background-primary)
       position: relative
-      width: 100%
       display: flex
       align-items: center
       justify-content: center
       padding: .75rem
       text-transform: capitalize
-      font-weight: 500
-      font-size: .85rem
+      font-weight: 400
+      font-size: .8rem
       color: var(--text-jaded)
+      transition: color .2s
+
+      &:hover
+        color: var(--text-normal)
 
       i
         font-weight: 300
         margin-left: .25rem
         color: var(--accent)
-
-      &:hover, &[data-active="true"]
-        background: var(--background-tertiary)
-        color: var(--text-normal)
 
     ul.optionsList
       $gapSize: $spacing * .5

@@ -1,71 +1,45 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState} from 'react'
 
-import Error from '../formComponents/Error'
-import Input from '../formComponents/Input'
-import SubmitBtn from '../formComponents/SubmitBtn'
+import LoginForm from './LoginForm'
+import RegisterForm from './RegisterForm'
+import UserSVG from '../../vectors/User'
 import { useAuth } from '../../contexts/authUser'
+import styles from './AuthLogin.module.sass'
+
 
 interface Props {}
 
 const AuthLogin: React.FC<Props> = () => {
 
-  const { authUser, signIn, loading, shallowPageReload } = useAuth()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState(null)
+  const { authUser } = useAuth()
 
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-
-    e.preventDefault()
-    setError(null)
-
-    if(signIn) {
-
-      const onSuccess = () => {
-        setEmail("")
-        setPassword("")
-        if(shallowPageReload) shallowPageReload()
-      }
-
-      signIn(email, password, onSuccess, setError)
-    }
-
-  }, [email, password, signIn, shallowPageReload])
+  const [section, setSection] = useState('register')
 
   return authUser ? <AuthLogOut /> : (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <Input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          name="email"
-          id="email"
-          placeholder="Email"
-          autoComplete="current-email"
-          required={true}
-          focusOnInit={true}
-        />
-        <Input
-          type="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          id="password"
-          placeholder="Password"
-          autoComplete="current-password"
-          required={true}
-        />
-        <div>
-          <Error>{error}</Error>
-          <SubmitBtn
-            disabled={(password.length <= 5 || email.length <= 3)}
-            text={"Login"}
-            isLoading={loading}
-            isLoadingVerb="Logging in"
-          />
-        </div>
-      </form>
+    <div className={styles.root}>
+
+      <div className={styles.toggleMenu}>
+        <button
+          type="button"
+          onClick={() => setSection('register')}
+          data-active={section === 'register'}
+        >
+          Register
+        </button>
+        <button
+          type="button"
+          onClick={() => setSection('login')}
+          data-active={section === 'login'}
+        >
+          Login
+        </button>
+      </div>
+
+      <div className={styles.content}>
+        {section === 'login' && <LoginForm />}
+        {section === 'register' && <RegisterForm />}
+      </div>
+
     </div>
   )
 
@@ -76,12 +50,22 @@ const AuthLogOut: React.FC<{}> = () => {
   const { authUser, signOut } = useAuth()
 
   return (
-    <div>
-      You are signed in as: {authUser.email}
-      <hr />
+    <div className={styles.loggedIn}>
+
+      <h3>You are signed in!</h3>
+
+      <div><UserSVG /> {authUser.email}</div>
+
+      <p>This session is persistant, you can navigate around or close this tab,
+        and next time you come back, you'll see that you are still logged in.
+      </p>
+
+      <i><img src="/images/magic.gif" /></i>
+
       <button type="button" onClick={signOut}>
         Logout
       </button>
+
     </div>
   )
 

@@ -1,86 +1,64 @@
+@import ../../../styles/sass/animations
 @import ../../../styles/sass/mixins
 @import ../../../styles/sass/vars
 
-@mixin invertedCorner($x, $y)
-  width: 2rem
-  height: 2rem
-  position: absolute
-  border-radius: 1rem
-  box-shadow: $x $y 1px var(--background-secondary)
-  z-index: 2
-
 .root
   display: flex
-  align-items: center
-  justify-content: center
+  align-items: flex-end
   flex-direction: column
-  padding: 0
+  padding: $spacing * 4 $spacing * 2
+  position: relative
+  flex: 1
+  justify-content: center
 
-  >div:nth-child(1), >div:nth-child(3)
-    height: $spacing * 2
-    background: var(--background-secondary)
-    width: 100%
+  &:after
+    @include fadeIn(1s)
+    content: ""
+    position: absolute
+    right: 0
+    top: 0
+    height: 100%
+    width: 1px
+    background: linear-gradient(to top, var(--background-secondary) 30%, var(--accent), var(--background-secondary) 70%)
+    animation: growHeight 1s forwards infinite
+    animation-iteration-count: 1
 
-  >div:nth-child(2)
-    display: flex
-    width: 100%
-    overflow: hidden
+  button
+    @include buttonReset
+    margin: $spacing * .25 0
+    color: var(--text-normal)
+    font-size: 1.25rem
+    font-family: $fontFamily
+    font-weight: 400
+    transition: color .25s
 
-    >div
-      width: $spacing * 2
-      background: var(--background-secondary)
+    &:hover
+      color: rgba(var(--accent-rgb), .75)
 
-    nav
-      @include blurBg(10px)
-      background: rgba(var(--background-tertiary-rgb), .3)
-      overflow: hidden
-      display: flex
-      flex-direction: column
-      position: relative
-      flex: 1
+    &[data-active="true"]
+      color: var(--accent)
 
-      i:nth-child(1)
-        @include invertedCorner(-1rem, -1rem)
-        top: 0
-        left: 0
+@include for-size(mobile)
+  .root
+    @include blurBg(18px, rgba(var(--background-secondary-rgb), .9))
+    position: sticky
+    top: 0
+    padding: $spacing 0
+    flex-direction: row
+    align-items: center
+    justify-content: center
+    background: rgba(var(--background-secondary-rgb), .4)
+    z-index: 9
 
-      i:nth-child(2)
-        @include invertedCorner(1rem, -1rem)
-        top: 0
-        right: 0
+    &:after
+      height: 1px
+      width: 100%
+      top: unset
+      bottom: 0
+      background: linear-gradient(to right, var(--background-secondary), var(--accent), var(--background-secondary))
 
-      i:nth-child(3)
-        @include invertedCorner(1rem, 1rem)
-        bottom: 0
-        right: 0
+    button
+      margin: 0 .5rem
 
-      i:nth-child(4)
-        @include invertedCorner(-1rem, 1rem)
-        bottom: 0
-        left: 0
-
-      >div
-        display: flex
-        flex-direction: column
-        position: relative
-        flex: 1
-        border-radius: 1rem
-        overflow: hidden
-        padding: 1rem
-
-      a
-        padding: $spacing * .35 $spacing * .5
-        display: inline-block
-        flex: 1
-        color: var(--text-jaded)
-        transition: color .2s, background .2s
-        font-weight: 600
-        z-index: 3
-        border-radius: 1rem
-
-        &:hover
-          color: var(--text-normal)
-
-        &[data-active="true"]
-          color: var(--text-normal)
-          background: rgba(var(--background-secondary-rgb), .45)
+      &:hover
+        color: inherit

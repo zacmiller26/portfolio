@@ -1,40 +1,26 @@
 import React from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
 
-//import HeartRate from '../../animations/HeartRate'
+import { MenuMapType } from '../../../pages/info'
 import Container from '../Container'
 import styles from './SiteMenu.module.sass'
 
 
-interface Props {}
+interface Props {
+  menuMap: MenuMapType
+}
 
-const SiteMenu: React.FC<Props> = () => {
-
-  const router = useRouter()
-
+const SiteMenu: React.FC<Props> = props => {
   return (
     <Container className={styles.root}>
-      <div />
-      <div>
-        <div />
-        <nav>
-          <i /><i /><i /><i />
-          <div>
-            <Link href="/about">
-              <a data-active={router.asPath === '/about'}>About</a>
-            </Link>
-            <Link href="/">
-              <a data-active={router.asPath === '/'}>Code Examples</a>
-            </Link>
-            <Link href="/contact">
-              <a data-active={router.asPath === '/contact'}>Contact</a>
-            </Link>
-          </div>
-        </nav>
-        <div />
-      </div>
-      <div />
+      {props.menuMap.map(([label, _ref, _component, isActive, scrollFn]) => (
+        <button
+          type="button"
+          data-active={isActive}
+          onClick={() => scrollFn()}
+        >
+          {label}
+        </button>
+      ))}
     </Container>
   )
 }

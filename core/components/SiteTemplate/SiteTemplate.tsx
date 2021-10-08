@@ -1,25 +1,37 @@
 import React from 'react'
+import Link from 'next/link'
 
+//import useViewportMeta from '../../hooks/useViewportMeta'
+import { MenuMapType } from '../../../pages/info'
 import SiteMain from './SiteMain'
 import SiteSidebar from './SiteSidebar'
-//import PatternSVG from '../../vectors/Pattern'
+import CloseSVG from '../../vectors/Close'
 import styles from './SiteTemplate.module.sass'
 
 
 interface Props {
-  header?: React.ReactNode
+  menuMap: MenuMapType
   children: React.ReactNode
 }
 
 const SiteTemplate: React.FC<Props> = props => {
+
+  //const { isMobile } = useViewportMeta()
+
   return (
     <div className={styles.root}>
 
-      <SiteSidebar />
+      <SiteSidebar menuMap={props.menuMap} />
 
-      <SiteMain header={props.header}>
+      <SiteMain>
         {props.children}
       </SiteMain>
+
+      <Link href="/">
+        <a className={styles.homeLink}>
+          <CloseSVG />
+        </a>
+      </Link>
 
     </div>
   )

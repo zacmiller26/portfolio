@@ -1,287 +1,66 @@
 import type { NextPage } from 'next'
-
+import Link from 'next/link'
 import Head from 'next/head'
-import { useMemo, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { throttle } from 'lodash'
 
-import ApiDictionary from '../core/components/ApiDictionary/ApiDictionary'
-import ApiVote from '../core/components/ApiVote/ApiVote'
-import AuthLogin from '../core/components/AuthLogin/AuthLogin'
-import KanBan from '../core/components/KanBan/KanBan'
-import CustomTheme from '../core/components/CustomTheme/CustomTheme'
-import NexusTBCBuild from '../core/components/Nexus/nexus-tbc-builds'
-import NexusBasicTable from '../core/components/Nexus/nexus-basic-table'
-import ScratchNView from '../core/components/ScratchNView/ScratchNView'
-import BoltSVG from '../core/vectors/Bolt'
-import BrightnessSVG from '../core/vectors/Brightness'
-import CodeSVG from '../core/vectors/Code'
-import GearSVG from '../core/vectors/Gear'
-import ToolSVG from '../core/vectors/Tool'
-import TableSVG from '../core/vectors/Table'
-import LogoGithubSVG from '../core/vectors/LogoGithub'
-import SiteTemplate from '../core/components/SiteTemplate/SiteTemplate'
+import useViewportMeta from '../core/hooks/useViewportMeta'
 import styles from '../styles/pages/index.module.sass'
 
 
-interface CodeExampleType {
-  name: string
-  description: string
-  summary: string
-  url: string
-  tags: string[]
-  icon: React.ReactNode,
-  logos: React.ReactNode[],
-  renderComponent: () => React.ReactNode
-}
+const IndexPage: NextPage = () => {
 
-const CODE_EXAMPLES: CodeExampleType[] = [
-  {
-    name: 'Dictionary Word Lookup',
-    description: 'REST API',
-    tags: ['Python', 'Django', 'DRF', 'API'],
-    icon: <CodeSVG />,
-    logos: [CodeSVG],
-    url: 'https://github.com/felfire/dictionary-url',
-    summary: "This sends a POST request to a Django DRF API "+
-    "that returns a PyDictionary lookup.",
-    renderComponent: () => <ApiDictionary />
-  },
-  {
-    name: 'KanBan Tasks',
-    description: 'LocalStorage KanBan Task Manager',
-    tags: ['React', 'Hooks', 'TypeScript', 'LocalStorage', 'Next.js', 'SASS'],
-    icon: <ToolSVG />,
-    logos: [GearSVG],
-    url: 'https://github.com/felfire/regex-url',
-    summary: "This CRUD example uses a LocalStorage-based React Hook for "+
-    "storing the tasks you create.",
-    renderComponent: () => <KanBan />
-  },
-  {
-    name: 'Site Theme',
-    description: 'Custom CSS Properties & React Context API',
-    tags: [
-      'React', 'Context API', 'TypeScript', 'LocalStorage', 'SASS',
-      'CSS Properties'
-    ],
-    icon: <BrightnessSVG />,
-    logos: [GearSVG],
-    url: 'https://github.com/felfire/regex-url',
-    summary: "This example uses LocalStorage, React's Context API, and Custom "+
-    "CSS Properties to create a customizable site theme.",
-    renderComponent: () => <CustomTheme />
-  },
-  /*{
-    name: 'Game Widget',
-    description: 'Interactive Game UX with strict logic',
-    tags: [
-      'React', 'Context API', 'TypeScript', 'LocalStorage', 'SASS',
-      'CSS Properties'
-    ],
-    icon: <BoltSVG />,
-    logos: [GearSVG],
-    url: 'https://github.com/felfire/regex-url',
-    summary: "This example uses LocalStorage, React's Context API, and Custom "+
-    "CSS Properties to create a customizable site theme.",
-    renderComponent: () => <NexusTBCBuild />
-  },*/
-  {
-    name: 'JSON Table',
-    description: 'Adjustable Table Rows/Cols Stored in JSON',
-    tags: [
-      'React', 'Context API', 'TypeScript', 'LocalStorage', 'SASS',
-      'CSS Properties'
-    ],
-    icon: <TableSVG />,
-    logos: [TableSVG],
-    url: 'https://github.com/felfire/regex-url',
-    summary: "This example uses LocalStorage, React's Context API, and Custom "+
-    "CSS Properties to create a customizable site theme.",
-    renderComponent: () => <NexusBasicTable />
-  },
-  {
-    name: 'User Login',
-    description: 'User Authentication & Sessions',
-    tags: [
-      'React', 'Context API', 'Firebase', 'Authentication', 'TypeScript', 'LocalStorage', 'SASS',
-      'CSS Properties'
-    ],
-    icon: <TableSVG />,
-    logos: [TableSVG],
-    url: 'https://github.com/felfire/regex-url',
-    summary: "This example uses LocalStorage, React's Context API, and Custom "+
-    "CSS Properties to create a customizable site theme.",
-    renderComponent: () => <AuthLogin />
-  },
-  {
-    name: 'Membership Subscriptions',
-    description: 'Stripe Subscription Products',
-    tags: [
-      'React', 'Stripe', 'Subscriptions', 'Firebase', 'TypeScript', 'LocalStorage', 'SASS',
-      'CSS Properties'
-    ],
-    icon: <TableSVG />,
-    logos: [TableSVG],
-    url: 'https://github.com/felfire/regex-url',
-    summary: "This example uses LocalStorage, React's Context API, and Custom "+
-    "CSS Properties to create a customizable site theme.",
-    renderComponent: () => <AuthLogin />
-  },
-  {
-    name: 'Scratch n\' View',
-    description: 'Scratch off paint to view picture',
-    tags: [
-      'React', 'Stripe', 'Subscriptions', 'Firebase', 'TypeScript', 'LocalStorage', 'SASS',
-      'CSS Properties'
-    ],
-    icon: <TableSVG />,
-    logos: [TableSVG],
-    url: 'https://github.com/felfire/regex-url',
-    summary: "This example uses LocalStorage, React's Context API, and Custom "+
-    "CSS Properties to create a customizable site theme.",
-    renderComponent: () => <ScratchNView />
-  },
-  {
-    name: 'Voting Mechanism',
-    description: 'Vote using a Django API',
-    tags: [
-      'React', 'Stripe', 'Subscriptions', 'Firebase', 'TypeScript', 'LocalStorage', 'SASS',
-      'CSS Properties'
-    ],
-    icon: <TableSVG />,
-    logos: [TableSVG],
-    url: 'https://github.com/felfire/regex-url',
-    summary: "This example uses a Django DRF API to send and store your "+
-    "vote, which utilizes request throttling, rate and total limits to the amount of votes, and shows total voting statistics.",
-    renderComponent: () => <ApiVote />
-  },
-  /*{
-    name: 'Sending Emails',
-    description: 'Python / Django / DRF / API',
-    summary: "This project demonstrates my ability to replicate a "+
-    "given design. I chose Twitter because it's widely used and a fun design.",
-    renderComponent: () => <><LogoDjangoSVG />OMG its an API!</>
-  },
-  {
-    name: 'Image Crop & Resize',
-    description: 'AWS / S3 / Python / Django / DRF / API',
-    summary: "This project demonstrates my ability to replicate a "+
-    "given design. I chose Twitter because it's widely used and a fun design.",
-    renderComponent: () => <>OMG its KanBan!</>
-  },
-  {
-    name: 'Twitter Look-alike',
-    description: 'Next.js / React / Firebase',
-    summary: "This project demonstrates my ability to replicate a "+
-    "given design. I chose Twitter because it's widely used and a fun design.",
-    renderComponent: () => <LookAlike />
-  },
-  {
-    name: 'React Form Components',
-    description: 'React / NPM',
-    summary: "This project demonstrates my ability to replicate a "+
-    "given design. I chose Twitter because it's widely used and a fun design.",
-    renderComponent: () => <>OMG its React Form Components!</>
-  },
-  {
-    name: 'React Mouseover Tooltips',
-    description: 'React',
-    summary: "This project demonstrates my ability to replicate a "+
-    "given design. I chose Twitter because it's widely used and a fun design.",
-    renderComponent: () => <>OMG its React Form Components!</>
-  },*/
-]
+  const { viewport } = useViewportMeta()
 
-const CodePage: NextPage = () => {
+  const [textShadow, setTextShadow] = useState('')
+  const [textShadowTwo, setTextShadowTwo] = useState('')
 
-  const [projectIndex, setProjectIndex] = useState<number | null>(null)
+  const handleMouseMove = useCallback(throttle((e) => {
 
-  const project = useMemo(() : (CodeExampleType | null) => (
-    projectIndex != null ? CODE_EXAMPLES[projectIndex] : null
-  ), [projectIndex])
+    const normalize = (
+      val: number, max: number, min: number, newMax: number, newMin: number
+    ) => {
+      return newMin + (val - min) * (newMax - newMin) / (max - min)
+    }
 
-  const projectComponent = useMemo(() => (
-    project && project.renderComponent()
-  ), [project])
+    const max = 9
+
+    let x = normalize(e.x, viewport.width, 0, max, - max)
+    let y = normalize(e.y, viewport.height, 0, max, - max)
+    let iX = (- x)
+    let iY = (- y)
+
+    setTextShadow(`${iX}px ${iY}px 1px`)
+    setTextShadowTwo(`${x}px ${y}px 1px`)
+
+  }, 20), [viewport])
+
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [handleMouseMove])
 
   return (
     <>
-
       <Head>
         <title>Zac Miller</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <SiteTemplate header={
-        !project ?
-          <div className={styles.codeExampleDetail}>
-            <div className={styles.breadcrumb}>
-              <div>
-                <h4>Code Examples</h4>
-              </div>
-            </div>
-          </div>
-         :
-          <div className={styles.codeExampleDetail}>
-            <div className={styles.breadcrumb}>
-              <div>
-                <button type="button" onClick={() => setProjectIndex(null)}>
-                  &larr;
-                </button>
-                <h4>{project.name}</h4>
-                <a href={project.url} target="_blank">
-                  <LogoGithubSVG />
-                </a>
-              </div>
-              <p>{project.summary}</p>
-              <ul>
-                {project.tags.map((tag) => (
-                  <li key={tag}>{tag}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-      }>
-        {!project ?
-          <ProjectList setProjectIndex={setProjectIndex} />
-          :
-          projectComponent
-        }
-      </SiteTemplate>
-
+      <Link href="/info">
+        <a className={styles.link}>
+          <span style={{ textShadow: `${textShadow} var(--accent)` }}>
+            {process.env.NEXT_PUBLIC_FIRST_NAME}
+          </span>
+          <em style={{ textShadow: `${textShadowTwo} var(--text-normal)` }}>
+            {process.env.NEXT_PUBLIC_LAST_NAME}
+          </em>
+        </a>
+      </Link>
     </>
 
   )
 
 }
 
-interface ProjectListProps {
-  setProjectIndex: Function
-}
-
-const ProjectList: React.FC<ProjectListProps> = props => {
-  return (
-    <ul className={styles.codeExampleList}>
-      {CODE_EXAMPLES.map((example, i) => (
-        <li key={example.name}>
-          <button
-            className={styles.codeExampleBtn}
-            type="button"
-            onClick={() => props.setProjectIndex(i)}
-          >
-            <i className={styles.projectIcon}>
-              {example.icon}
-            </i>
-            <span className={styles.projectName}>
-              {example.name}
-            </span>
-            <em className={styles.projectDescription}>
-              {example.description}
-            </em>
-          </button>
-        </li>
-      ))}
-    </ul>
-  )
-}
-
-export default CodePage
+export default IndexPage
