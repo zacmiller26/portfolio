@@ -9,8 +9,8 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
 
   const { isMobile, viewport } = useViewportMeta()
 
-  const [textShadow, setTextShadow] = useState('8px 8px 1px')
-  const [textShadowTwo, setTextShadowTwo] = useState('-8px -8px 1px')
+  const [textShadow, setTextShadow] = useState('-7.5px 5px 1px')
+  const [textShadowTwo, setTextShadowTwo] = useState('7.5px -5px 1px')
 
   const handleMouseMove = useCallback(throttle((e) => {
 
@@ -54,7 +54,7 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
       data-visible={visible}
       type="button"
     >
-      {[...Array(50)].map((_, index) => (
+      {[...Array(56)].map((_, index) => (
         <Simulacrum
           key={index}
           multiply={(index+1) * .75} blur={(index+1) * .2} shadow={textShadow} shadowTwo={textShadowTwo}

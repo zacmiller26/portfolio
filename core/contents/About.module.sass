@@ -8,43 +8,32 @@ $avatarSize: 240px
   flex-direction: column
 
   ul
-    display: flex
-    flex-wrap: wrap
     margin-bottom: $spacing * .75
     max-width: $spacing * 17
 
     li
       min-width: 40%
       flex: 1
-      display: flex
-      justify-content: center
-      align-items: center
-      background: var(--background-primary)
-      padding: .75rem
-      margin: 0 $spacing * .25 $spacing * .25 0
-      font-size: 1.1em
-      text-align: center
-      font-weight: 700
+      font-size: 1.1rem
+      font-weight: 800
+      margin: 0 0 .5rem
 
-      &:hover
-        background: var(--background-tertiary)
-
-      &:nth-child(3), &:nth-child(4)
+      &:last-child
         margin-bottom: 0
 
       em
         display: inline-flex
-        font-weight: 500
+        font-weight: 400
         font-style: italic
         color: var(--accent)
 
   p
-    color: var(--text-jaded)
+    color: var(--text-normal)
     display: block
-    margin: 0 $spacing $spacing * .75
+    margin: 0 0 $spacing * .75
     max-width: $spacing * 15
     line-height: 1.75rem
-    font-size: 1.05rem
+    font-size: 1.1rem
 
     >i
       font-size: 2rem
@@ -60,7 +49,7 @@ $avatarSize: 240px
       align-items: center
 
       >b
-        $size: 7rem
+        $size: 5rem
         display: block
         width: $size
         height: $size
@@ -105,7 +94,7 @@ $avatarSize: 240px
     border: $borderWidth solid var(--accent)
     border-top: 0
     border-right: 0
-    border-radius: $spacing * .25
+    border-radius: $spacing * .1
 
   &:nth-child(odd):before
     border: $borderWidth solid var(--accent)

@@ -73,8 +73,6 @@ const Talent: React.FC<Props> = props => {
     }
   }, [ref, props.editable])
 
-  useEffect(() => console.log(pathClasses), [pathClasses])
-
   return (
     <div className={styles.talent} data-has-points={talent.points > 0}>
 

@@ -22,7 +22,6 @@ export default function useApi() {
 
     await fetch(url, { method, body })
       .then((res) => {
-        console.log(res)
         if (res.ok) return res.json()
         throw new Error('Something went wrong')
       })

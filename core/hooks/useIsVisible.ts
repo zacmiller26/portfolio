@@ -31,7 +31,6 @@ export default function useIsElemVisible(props: Props) {
     if(!intersectionObserverSupported) return null
     return new IntersectionObserver(
       ([entry]) => {
-        console.log(entry)
         setIsVisible(entry.isIntersecting)
       }, { threshold: props.threshold, }
     )

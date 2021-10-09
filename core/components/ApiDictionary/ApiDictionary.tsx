@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import ApiTemplate from '../ApiTemplate/ApiTemplate'
 import Input from '../formComponents/Input'
@@ -20,8 +20,6 @@ const ApiDictionary: React.FC<Props> = () => {
     const url = 'http://localhost:8000/v1/code-samples/dictionary/'
     apiCall(url, formData, 'POST')
   }, [word, apiCall])
-
-  useEffect(() => console.log(result, errors), [result, errors])
 
   return (
     <ApiTemplate isLoading={isLoading} apiResponse={result}>
