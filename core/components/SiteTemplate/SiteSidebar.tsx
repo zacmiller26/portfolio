@@ -1,8 +1,7 @@
 import React, { useCallback, useMemo } from 'react'
 
-import { MenuMapType } from '../../../pages/info'
+import { MenuMapType } from '../../../pages/index'
 import SiteMenu from './SiteMenu'
-import ThemeBar from './ThemeBar'
 import styles from './SiteSidebar.module.sass'
 
 
