@@ -1,9 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { createRef, useCallback, useEffect, useMemo, useState } from 'react'
-import { debounce } from 'lodash'
 
-import useViewportMeta from '../core/hooks/useViewportMeta'
 import Gate from '../core/contents/Gate'
 import About from '../core/contents/About'
 import Contact from '../core/contents/Contact'
@@ -17,7 +15,8 @@ export type MenuMapType = [
   React.RefObject<HTMLDivElement>, // component ref
   React.ReactNode, // component
   boolean, // is active
-  (i?: number) => void // scroll to component
+  (i?: number) => void, // scroll to component
+  () => void // return home
 ][]
 
 const SECTIONS = {
@@ -28,16 +27,15 @@ const SECTIONS = {
 
 const IndexPage: NextPage = () => {
 
-  const { viewport } = useViewportMeta()
   const [top, setTop] = useState<undefined | string>(undefined)
   const [section, setSection] = useState(0)
   const [gated, setGated] = useState(true)
 
   const scrollToSection = useCallback((index: number) => {
     if(index >= 0 && (index + 1 <= Object.keys(SECTIONS).length)) {
-    const toTop = 100 * index
-    setTop('-' + toTop + 'vh')
-    setSection(index)
+      const toTop = 100 * index
+      setTop('-' + toTop + 'vh')
+      setSection(index)
     }
   }, [])
 
@@ -48,41 +46,33 @@ const IndexPage: NextPage = () => {
         createRef(),
         component,
         false,
-        (index?: number) => scrollToSection(index ? index : i)
+        (index?: number) => scrollToSection(index ? index : i),
+        () => setGated(true)
       ]
     ))
   )
 
-  const activeSection = useMemo(() => {
-    return Object.entries(SECTIONS)[section][0]
-  }, [section])
+  const activeSection = useMemo(() => menuMap[section], [section, menuMap])
 
-  const handleScroll = useCallback(debounce((_) => {
+  useEffect(() => {
     setMenuMap(prev => {
-      return prev.map(([label, ref, component, _, scrollFn], i) => {
-        //const top = (ref?.current?.getBoundingClientRect().top || 0)
-        //const isActive = top >= 0 && top < viewport.height
-        //if(isActive) setActiveSection(label)
-        return [label, ref, component, (i === section), scrollFn]
+      return prev.map((arr, i) => {
+        let newItem = arr
+        newItem[3] = i === section
+        return newItem
       })
     })
-  }, 10), [viewport, section])
+  }, [section])
 
   useEffect(() => {
-    // call on init to set active menu item
-    handleScroll(null)
-  }, [handleScroll])
-
-  useEffect(() => {
-    document.addEventListener('scroll', handleScroll, true)
-    return () => document.removeEventListener('scroll', handleScroll, true)
-  }, [viewport, handleScroll])
+    if(gated) setSection(0)
+  }, [gated])
 
   return (
     <>
 
       <Head>
-        <title>Zac Miller{gated ? '' : ` - ${activeSection}`}</title>
+        <title>Zac Miller{gated ? '' : ` - ${activeSection[0]}`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

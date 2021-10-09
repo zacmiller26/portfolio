@@ -43,7 +43,7 @@ $avatarSize: 240px
       margin-top: $spacing * .5
 
     &:nth-child(3)
-      @include blurBg(10px, rgba(var(--background-primary-rgb), .95))
+      //@include blurBg(10px, rgba(var(--background-primary-rgb), .95))
       margin: $spacing 0 $spacing $avatarSize / 4
       padding: $spacing
       background: rgba(var(--background-primary-rgb), .35)
@@ -99,13 +99,19 @@ $avatarSize: 240px
 @include for-size(mobile)
   .root
     flex-direction: column
-    justify-content: center
+    justify-content: flex-start
+    align-items: flex-start
 
     .avatar
-      margin: 0 0 $spacing
+      display: none
 
     p
-      text-align: center
+      text-align: left !important
+      margin: 0 0 $spacing !important
+      padding: 0 !important
+      font-weight: unset !important
+      font-size: 1rem !important
+      background: unset !important
 
 @include for-size(tablet-and-down)
   .root

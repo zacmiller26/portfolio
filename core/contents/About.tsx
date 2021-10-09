@@ -22,6 +22,7 @@ const About = () => {
         month.
       </p>
       <p>
+        I'd love to bring my <Tag>experience</Tag> to your team. <br />
         Let's get in <Tag>touch!</Tag>
         <br /><br />
         <i>-Zac</i>

@@ -137,3 +137,21 @@ $fs: .8rem
             color: var(--text-muted)
             font-weight: 300
             opacity: .5
+
+
+
+@include for-size(mobile)
+  .root
+    padding: $spacing * .5
+
+    .sectionMenu
+      display: flex
+      flex-wrap: wrap
+      margin: 0 0 $spacing
+
+      button
+        padding: .25rem
+        background: none !important
+
+        &[data-active="true"]
+          color: var(--accent)

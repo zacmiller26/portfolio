@@ -58,7 +58,6 @@ ul.codeExampleList
           display: flex
           font-size: 1.15rem
           font-weight: 600
-          text-align: center
 
         .projectDescription
           display: flex
@@ -145,3 +144,13 @@ div.codeExampleDetail
 
           &:after
             display: none
+
+
+@include for-size(mobile)
+  ul.codeExampleList
+    position: relative
+    display: flex
+    flex-direction: column
+
+    li
+      margin-bottom: $spacing * .75

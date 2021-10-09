@@ -1,11 +1,9 @@
 import { useMemo, useState } from 'react'
 
 import ApiDictionary from '../components/ApiDictionary/ApiDictionary'
-import ApiVote from '../components/ApiVote/ApiVote'
 import AuthLogin from '../components/AuthLogin/AuthLogin'
 import KanBan from '../components/KanBan/KanBan'
 import CustomTheme from '../components/CustomTheme/CustomTheme'
-import NexusTBCBuild from '../components/Nexus/nexus-tbc-builds'
 import NexusBasicTable from '../components/Nexus/nexus-basic-table'
 import ScratchNView from '../components/ScratchNView/ScratchNView'
 import BoltSVG from '../vectors/Bolt'
@@ -13,11 +11,10 @@ import BrightnessSVG from '../vectors/Brightness'
 import CodeSVG from '../vectors/Code'
 import GearSVG from '../vectors/Gear'
 import PenSVG from '../vectors/Pen'
-import ToolSVG from '../vectors/Tool'
 import TableSVG from '../vectors/Table'
 import UserSVG from '../vectors/User'
 import LogoGithubSVG from '../vectors/LogoGithub'
-import SiteTemplate from '../components/SiteTemplate/SiteTemplate'
+import useViewportMeta from '../hooks/useViewportMeta'
 import styles from './Examples.module.sass'
 
 
@@ -29,6 +26,7 @@ interface CodeExampleType {
   tags: string[]
   icon: React.ReactNode,
   logos: React.ReactNode[],
+  mobileSupport: boolean,
   renderComponent: () => React.ReactNode
 }
 
@@ -42,6 +40,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     url: 'https://github.com/felfire/portfolio/blob/main/core/components/KanBan/KanBan.tsx',
     summary: "This CRUD example uses a LocalStorage-based React Hook for "+
     "storing the tasks you create.",
+    mobileSupport: false,
     renderComponent: () => <KanBan />
   },
   {
@@ -53,6 +52,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     url: 'https://github.com/felfire/portfolio/blob/main/core/components/ApiDictionary/ApiDictionary.tsx',
     summary: "This sends a POST request to a Django DRF API "+
     "that returns a PyDictionary lookup.",
+    mobileSupport: true,
     renderComponent: () => <ApiDictionary />
   },
   {
@@ -67,6 +67,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     url: 'https://github.com/felfire/portfolio/blob/main/core/components/SiteTemplate/ThemeBar.tsx',
     summary: "This example uses LocalStorage, React's Context API, and Custom "+
     "CSS Properties to create customizable site theme colors.",
+    mobileSupport: true,
     renderComponent: () => <CustomTheme />
   },
   /*{
@@ -96,6 +97,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     summary: "This example is a dynamic table that can expand in rows and "+
     "columns up to the preset limit, with tabs to view the JSON or CSV output."+
     " This uses basic React functionality.",
+    mobileSupport: true,
     renderComponent: () => <NexusBasicTable />
   },
   {
@@ -111,6 +113,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     summary: "This example uses a Context Hook with all the basic functionality "+
     "for user sessions using Firebase Auth. By using React Context, the "+
     "`authUser` object is readily accessible to any component that needs it.",
+    mobileSupport: true,
     renderComponent: () => <AuthLogin />
   },
   /*{
@@ -140,6 +143,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     summary: "This example lets you run your mouse over the image to reveal it."+
     " A `mouseover` event listener is activated on the panels covering the"+
     " image, which reduces their opacity to 0 when the event is triggered.",
+    mobileSupport: false,
     renderComponent: () => <ScratchNView />
   },
   /*{
@@ -195,6 +199,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
 
 const CodePage = () => {
 
+  const { isMobile } = useViewportMeta()
   const [projectIndex, setProjectIndex] = useState<number | null>(null)
 
   const project = useMemo(() : (CodeExampleType | null) => (
@@ -207,9 +212,12 @@ const CodePage = () => {
 
   return (
     <>
-      {!project ?
+      {!project || (isMobile && !project.mobileSupport) ?
         <>
-          <ProjectList setProjectIndex={setProjectIndex} />
+          <ProjectList
+            setProjectIndex={setProjectIndex}
+            isMobile={isMobile}
+          />
         </>
         :
         <>
@@ -243,12 +251,18 @@ const CodePage = () => {
 
 interface ProjectListProps {
   setProjectIndex: Function
+  isMobile: boolean
 }
 
 const ProjectList: React.FC<ProjectListProps> = props => {
+
+  const showEx = (example: CodeExampleType) => {
+    return (!props.isMobile || props.isMobile && example.mobileSupport)
+  }
+
   return (
     <ul className={styles.codeExampleList}>
-      {CODE_EXAMPLES.map((example, i) => (
+      {CODE_EXAMPLES.map((example, i) => showEx(example) && (
         <li key={example.name}>
           <button
             className={styles.codeExampleBtn}
