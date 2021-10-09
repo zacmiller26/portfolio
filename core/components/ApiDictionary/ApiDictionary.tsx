@@ -17,7 +17,7 @@ const ApiDictionary: React.FC<Props> = () => {
     e.preventDefault()
     const formData = new FormData()
     formData.append('word', word)
-    const url = 'http://localhost:8000/v1/code-samples/dictionary/'
+    const url = '/api/v1/dictionary/'
     apiCall(url, formData, 'POST')
   }, [word, apiCall])
 

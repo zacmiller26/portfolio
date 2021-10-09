@@ -45,13 +45,16 @@ const CODE_EXAMPLES: CodeExampleType[] = [
   },
   {
     name: 'Dictionary Word Lookup',
-    description: 'Get word definition using Django REST API (DRF)',
+    description: 'Lookup the definition of a word using a public Dictionary API.',
     tags: ['Python', 'Django', 'DRF', 'API', 'POST'],
     icon: <CodeSVG />,
     logos: [CodeSVG],
     url: 'https://github.com/felfire/portfolio/blob/main/core/components/ApiDictionary/ApiDictionary.tsx',
-    summary: "This sends a POST request to a Django DRF API "+
-    "that returns a PyDictionary lookup.",
+    summary: "This sends a POST request to a Next.js API route that then "+
+    "makes a GET request to a Dictionary API, returning the short definition." +
+    " The two requests are redundant, but I wanted to feed two birds with one" +
+    " scone. Show ability to create own API routes, and to utilize an external." +
+    " Plus, this way API keys aren't exposed. :)",
     mobileSupport: true,
     renderComponent: () => <ApiDictionary />
   },

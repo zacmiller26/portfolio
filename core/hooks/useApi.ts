@@ -2,6 +2,10 @@ import { useCallback, useState } from 'react'
 
 import useToggle from './useToggle'
 
+const DEFAULT_HEADERS = {
+  "Content-Type": "application/json"
+}
+
 export default function useApi() {
 
   const [result, setResult] = useState<null | Object>(null)
@@ -15,12 +19,18 @@ export default function useApi() {
   }, [])
 
   const apiCall = useCallback(async (
-    url: string, body: FormData, method: "POST" | "PUT") => {
+    url: string, formData: FormData, method: "POST" | "PUT") => {
 
     clear()
     toggleIsLoading(true)
 
-    await fetch(url, { method, body })
+    var newObj: {[key: string]: any} = {}
+    formData.forEach(function(value, key){
+        newObj[key] = value
+    })
+    const body = JSON.stringify(newObj);
+
+    await fetch(url, { method, body, headers: DEFAULT_HEADERS })
       .then((res) => {
         if (res.ok) return res.json()
         throw new Error('Something went wrong')
