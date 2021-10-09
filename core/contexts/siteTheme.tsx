@@ -16,8 +16,8 @@ const ACCENT_OPTIONS = ['blue', 'green', 'orange', 'purple', 'ruby']
 
 export function SiteThemeProvider({ children }: { children: React.ReactNode }) {
 
-  const [accent, setAccent] = useLocalStorage("site_accent", THEME_OPTIONS[0])
-  const [theme, setTheme] = useLocalStorage("site_theme", ACCENT_OPTIONS[0])
+  const [accent, setAccent] = useLocalStorage("site_accent", ACCENT_OPTIONS[0])
+  const [theme, setTheme] = useLocalStorage("site_theme", THEME_OPTIONS[0])
 
   const cssProperties = useCssProperties([
     ...THEME_OPTIONS.map(o => `theme-${o}`),
