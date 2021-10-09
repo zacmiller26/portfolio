@@ -7,10 +7,10 @@ import styles from './Gate.module.sass'
 
 const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
 
-  const { viewport } = useViewportMeta()
+  const { isMobile, viewport } = useViewportMeta()
 
-  const [textShadow, setTextShadow] = useState('')
-  const [textShadowTwo, setTextShadowTwo] = useState('')
+  const [textShadow, setTextShadow] = useState('8px 8px 1px')
+  const [textShadowTwo, setTextShadowTwo] = useState('-8px -8px 1px')
 
   const handleMouseMove = useCallback(throttle((e) => {
 
@@ -35,6 +35,14 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
   }, 20), [viewport, visible])
 
   useEffect(() => {
+    // reset shadows when not visible
+    if(!visible) {
+      setTextShadow('')
+      setTextShadowTwo('')
+    }
+  }, [visible])
+
+  useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [handleMouseMove])
@@ -46,25 +54,59 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
       data-visible={visible}
       type="button"
     >
-      <i>
-        <span style={{ textShadow: `${textShadowTwo} rgba(var(--accent-rgb), .25)` }}>
-          {process.env.NEXT_PUBLIC_FIRST_NAME}
-        </span>
-        <em style={{ textShadow: `${textShadow} rgba(var(--accent-rgb), .25)` }}>
-          {process.env.NEXT_PUBLIC_LAST_NAME}
-        </em>
-      </i>
+      {[...Array(50)].map((_, index) => (
+        <Simulacrum
+          key={index}
+          multiply={(index+1) * .75} blur={(index+1) * .2} shadow={textShadow} shadowTwo={textShadowTwo}
+        />
+      ))}
       <a className={styles.link}>
-        <span style={{ textShadow: `${textShadow} var(--accent)` }}>
+        <span style={{ textShadow: `${textShadowTwo} rgba(var(--background-secondary-rgb), .7)` }}>
           {process.env.NEXT_PUBLIC_FIRST_NAME}
         </span>
-        <em style={{ textShadow: `${textShadowTwo} var(--text-normal)` }}>
+        <em style={{ textShadow: `${textShadow} rgba(var(--background-secondary-rgb), .7)` }}>
           {process.env.NEXT_PUBLIC_LAST_NAME}
         </em>
       </a>
+      <b>{isMobile ? 'Tap' : 'Click'} to enter</b>
     </button>
   )
 
+}
+
+interface SProps {
+  shadow: string
+  shadowTwo: string
+  multiply: number
+  blur: number
+}
+
+const Simulacrum: React.FC<SProps> = props => {
+
+  const { shadow, shadowTwo, multiply, blur } = props
+
+  const multiplyShadow = useCallback((
+    shadow: string, multiply: number, blur: number
+  ) => {
+
+    let coords: any = shadow.split('px')
+    coords[0] = Number(coords[0]) * Number(multiply)
+    coords[1] = Number(coords[1]) * Number(multiply)
+    return `${coords[0]}px ${coords[1]}px ${Math.round(blur)}px`
+
+  }, [])
+
+  return (
+    <i>
+      <span style={{
+        textShadow: `${multiplyShadow(shadowTwo, multiply, blur)} rgba(var(--accent-rgb), .${Math.round(40/multiply)})` }}>
+        {process.env.NEXT_PUBLIC_FIRST_NAME}
+      </span>
+      <em style={{ textShadow: `${multiplyShadow(shadow, multiply, blur)} rgba(var(--text-normal-rgb), .${Math.round((40/multiply) / 1.1)})` }}>
+        {process.env.NEXT_PUBLIC_LAST_NAME}
+      </em>
+    </i>
+  )
 }
 
 export default Gate

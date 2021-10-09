@@ -65,7 +65,10 @@ const IndexPage: NextPage = () => {
   }, [section])
 
   useEffect(() => {
-    if(gated) setSection(0)
+    if(gated) {
+      setTop(undefined)
+      setSection(0)
+    }
   }, [gated])
 
   return (

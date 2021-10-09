@@ -27,21 +27,27 @@
       --text-normal: #262626
       --text-jaded: #404040
       --text-muted: #737373
+      --text-normal-rgb: #{hex-to-rgb(#262626)}
+      --text-jaded-rgb: #{hex-to-rgb(#404040)}
+      --text-muted-rgb: #{hex-to-rgb(#737373)}
 
 html
 
   // defaults
   --mobileMaxWidth: #{$mobileMaxWidth}
+  --text-error: #E0245E
   --text-normal: #FFF
   --text-jaded: #C5D1DA
   --text-muted: #6E7E8C
-  --text-error: #E0245E
+  --text-normal-rgb: #{hex-to-rgb(#FFF)}
+  --text-jaded-rgb: #{hex-to-rgb(#C5D1DA)}
+  --text-muted-rgb: #{hex-to-rgb(#6E7E8C)}
 
   // accents
   @include accentMixin('blue', #2bb7ff, #2bb7ff, #2afe83)
   @include accentMixin('green', #9EFF36, #9EFF36, #FF3681)
   @include accentMixin('orange', #FFBB00, #FFD500, #A975FF)
-  @include accentMixin('purple', #7800FF, #A975FF, #9EFF36)
+  @include accentMixin('purple', #A975FF, #A975FF, #9EFF36)
   @include accentMixin('ruby', #ED485F, #FF465F, #FFFF60)
 
   // themes

@@ -7,119 +7,108 @@ $avatarSize: 240px
   display: flex
   flex-direction: column
 
-  .avatar
-    $size: $avatarSize
-    width: $size
-    height: $size
-    background: url(/images/thumbnail.png) no-repeat center
-    background-size: cover
-    margin-right: $spacing * 2
-    position: absolute
-    overflow: hidden
-    left: 0
-    z-index: 0
-    top: 0
-    border-radius: $avatarSize * .05
+  ul
+    display: flex
+    flex-wrap: wrap
+    margin-bottom: $spacing * .75
+    max-width: $spacing * 17
 
-    //>div
-      $shrink: 13%
-      position: absolute
-      left: $shrink
-      top: $shrink
-      height: 100 - ($shrink * 2)
-      width: 100 - ($shrink * 2)
-      transform: skewX(-10deg)
-      box-shadow: 0 0 1px 1000px var(--background-secondary)
+    li
+      min-width: 40%
+      flex: 1
+      display: flex
+      justify-content: center
+      align-items: center
+      background: var(--background-primary)
+      padding: .75rem
+      margin: 0 $spacing * .25 $spacing * .25 0
+      font-size: 1.1em
+      text-align: center
+      font-weight: 700
+
+      &:hover
+        background: var(--background-tertiary)
+
+      &:nth-child(3), &:nth-child(4)
+        margin-bottom: 0
+
+      em
+        display: inline-flex
+        font-weight: 500
+        font-style: italic
+        color: var(--accent)
 
   p
-    flex: 1
-    font-size: 1.1rem
-    line-height: 1.95rem
-    z-index: 4
-    margin-left: $avatarSize + 20px
+    color: var(--text-jaded)
     display: block
-
-    &:nth-child(2)
-      margin-top: $spacing * .5
-
-    &:nth-child(3)
-      //@include blurBg(10px, rgba(var(--background-primary-rgb), .95))
-      margin: $spacing 0 $spacing $avatarSize / 4
-      padding: $spacing
-      background: rgba(var(--background-primary-rgb), .35)
-      border-radius: $avatarSize * .05
-
-    &:nth-child(4)
-      margin-left: $avatarSize * .5
+    margin: 0 $spacing $spacing * .75
+    max-width: $spacing * 15
+    line-height: 1.75rem
+    font-size: 1.05rem
 
     >i
       font-size: 2rem
       font-family: 'Permanent Marker'
       line-height: 2rem
+      color: var(--text-normal)
 
       >em
         color: var(--accent)
 
-    >em
-      $borderWidth: 4px
-      display: inline-block
-      color: var(--background-secondary)
-      padding: 0 .45rem
-      margin: 0 .1rem
-      line-height: 1.4rem
-      font-weight: 600
-      letter-spacing: 1.4px
-      position: relative
+    >strong
+      display: flex
+      align-items: center
 
-      i
-        position: relative
+      >b
+        $size: 7rem
+        display: block
+        width: $size
+        height: $size
+        border-radius: $size
+        background: url(/images/thumbnail.png) center
+        background-size: cover
+        background-repeat: no-repeat
+        margin-right: 1rem
 
-      &:before
-        content: ""
-        position: absolute
-        left: 0
-        top: 0
-        width: 100%
-        height: 100%
-        box-sizing: border-box
-        transform: skewX(24deg)
-        background: rgba(var(--accent-rgb), .8)
-        z-index: -1
-        border: $borderWidth solid var(--accent)
-        border-top: 0
-        border-right: 0
-        border-radius: $spacing * .25
+      >i
+        font-size: 2rem
+        font-family: 'Permanent Marker'
+        line-height: 2rem
+        color: var(--text-normal)
 
-      &:nth-child(odd):before
-        border: $borderWidth solid var(--accent)
-        border-bottom: 0
-        border-left: 0
-        transform: skewX(-24deg)
 
-@include for-size(mobile)
-  .root
-    flex-direction: column
-    justify-content: flex-start
-    align-items: flex-start
+.tag
+  $borderWidth: 4px
+  display: inline-block
+  color: var(--background-secondary)
+  padding: 0 .45rem
+  margin: 0 .1rem
+  line-height: 1.4rem
+  font-weight: 600
+  letter-spacing: 1.4px
+  position: relative
 
-    .avatar
-      display: none
+  i
+    position: relative
 
-    p
-      text-align: left !important
-      margin: 0 0 $spacing !important
-      padding: 0 !important
-      font-weight: unset !important
-      font-size: 1rem !important
-      background: unset !important
+  &:before
+    content: ""
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    box-sizing: border-box
+    transform: skewX(24deg)
+    background: rgba(var(--accent-rgb), .8)
+    z-index: -1
+    border: $borderWidth solid var(--accent)
+    border-top: 0
+    border-right: 0
+    border-radius: $spacing * .25
 
-@include for-size(tablet-and-down)
-  .root
-    flex-direction: column
-    justify-content: center
-
-    .avatar
-      margin: 0 0 $spacing
-
-    p
-      text-align: center
+  &:nth-child(odd):before
+    border: $borderWidth solid var(--accent)
+    border-bottom: 0
+    border-left: 0
+    transform: skewX(-24deg)

@@ -21,6 +21,12 @@
   @-moz-document url-prefix()
     background: unquote($backup_bg)
 
+@mixin blurBgUnset
+  backdrop-filter: unset !important
+  -webkit-backdrop-filter: unset !important
+  -o-filter: unset !important
+  -ms-filter: unset !important
+
 @mixin inputReset
   width: auto
   font: normal
