@@ -54,10 +54,10 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
       data-visible={visible}
       type="button"
     >
-      {[...Array(56)].map((_, index) => (
+      {[...Array(100)].map((_, index) => (
         <Simulacrum
           key={index}
-          multiply={(index+1) * .75} blur={(index+1) * .1} shadow={textShadow} shadowTwo={textShadowTwo}
+          multiply={(index+1) * 2.5} blur={(index+1) * .5} shadow={textShadow} shadowTwo={textShadowTwo}
         />
       ))}
       <a className={styles.link}>
