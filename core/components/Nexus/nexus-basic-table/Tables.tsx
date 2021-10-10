@@ -158,7 +158,9 @@ const Tables = (props: ComponentProps) => {
         >
         </JSONPretty>
         :
-          table.toString()
+          <span style={{ whiteSpace: 'pre' }}>
+            {table.map(i => i.join(',')).join('\n').toString()}
+          </span>
       }
       {props.isEditor && <ListErrors errors={props.nexusDataErrors} />}
 
