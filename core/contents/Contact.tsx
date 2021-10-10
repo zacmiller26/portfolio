@@ -35,14 +35,14 @@ const Contact = () => {
             `?subject=Contacting you from your Portfolio Site`+
             `&body=Hey Zac, I think we should work together!`
           }>
-          {process.env.NEXT_PUBLIC_CONTACT_EMAIL}
+          {(process.env.NEXT_PUBLIC_CONTACT_EMAIL || '')}
         </a>
       </li>
       <li>
         <PhoneSVG />
-        <a href={`tel:${cleanStr(process.env.NEXT_PUBLIC_CONTACT_PHONE)}`}>
-          {process.env.NEXT_PUBLIC_CONTACT_PHONE}
-        </a>
+          <span dangerouslySetInnerHTML={{
+            __html: (process.env.NEXT_PUBLIC_CONTACT_PHONE || '')
+          }} />
       </li>
       <li>
         <LogoInstaSVG />

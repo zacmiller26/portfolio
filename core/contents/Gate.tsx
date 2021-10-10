@@ -11,6 +11,7 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
 
   const [textShadow, setTextShadow] = useState('-7.5px 5px 1px')
   const [textShadowTwo, setTextShadowTwo] = useState('7.5px -5px 1px')
+  //const [scale, setScale] = useState(1)
 
   const handleMouseMove = useCallback(throttle((e) => {
 
@@ -31,6 +32,9 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
 
     setTextShadow(`${iX}px ${iY}px 1px`)
     setTextShadowTwo(`${x}px ${y}px 1px`)
+
+    //let nx = normalize(e.x + e.y, (viewport.width + viewport.height)/2, 0, 1.2, .4)
+    //setScale(+(Math.round(Number(nx + "e+2"))  + "e-2"))
 
   }, 20), [viewport, visible])
 
@@ -105,10 +109,13 @@ const Simulacrum: React.FC<SProps> = props => {
   return (
     <i>
       <span style={{
-        textShadow: `${multiplyShadow(shadowTwo, multiply, blur)} rgba(var(--accent-rgb), .${Math.round((100/multiply) / 1.1)})` }}>
+        textShadow: `${multiplyShadow(shadowTwo, multiply, blur)} rgba(var(--text-normal-rgb), .${Math.round((100/multiply) / 1.1)})`
+      }}>
         {process.env.NEXT_PUBLIC_FIRST_NAME}
       </span>
-      <em style={{ textShadow: `${multiplyShadow(shadow, multiply, blur)} rgba(var(--text-normal-rgb), .${Math.round((100/multiply) / 1.1)})` }}>
+      <em style={{
+        textShadow: `${multiplyShadow(shadow, multiply, blur)} rgba(var(--accent-rgb), .${Math.round((100/multiply) / 1.1)})`
+      }}>
         {process.env.NEXT_PUBLIC_LAST_NAME}
       </em>
     </i>
