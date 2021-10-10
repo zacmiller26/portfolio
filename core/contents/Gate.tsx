@@ -56,10 +56,13 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
         data-visible={visible}
         type="button"
       >
-        {[...Array(100)].map((_, index) => (
+        {[...Array(26)].map((_, index) => (
           <Simulacrum
             key={index}
-            multiply={(index+1) * 2.5} blur={(index+1) * .5} shadow={textShadow} shadowTwo={textShadowTwo}
+            multiply={(index+1) * 2.75}
+            blur={(index+1) * .5}
+            shadow={textShadow}
+            shadowTwo={textShadowTwo}
           />
         ))}
         <a className={styles.link}>
@@ -102,10 +105,10 @@ const Simulacrum: React.FC<SProps> = props => {
   return (
     <i>
       <span style={{
-        textShadow: `${multiplyShadow(shadowTwo, multiply, blur)} rgba(var(--accent-rgb), .${Math.round(40/multiply)})` }}>
+        textShadow: `${multiplyShadow(shadowTwo, multiply, blur)} rgba(var(--accent-rgb), .${Math.round((100/multiply) / 1.1)})` }}>
         {process.env.NEXT_PUBLIC_FIRST_NAME}
       </span>
-      <em style={{ textShadow: `${multiplyShadow(shadow, multiply, blur)} rgba(var(--text-normal-rgb), .${Math.round((40/multiply) / 1.1)})` }}>
+      <em style={{ textShadow: `${multiplyShadow(shadow, multiply, blur)} rgba(var(--text-normal-rgb), .${Math.round((100/multiply) / 1.1)})` }}>
         {process.env.NEXT_PUBLIC_LAST_NAME}
       </em>
     </i>
