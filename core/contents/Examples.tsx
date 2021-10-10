@@ -32,14 +32,31 @@ interface CodeExampleType {
 
 const CODE_EXAMPLES: CodeExampleType[] = [
   {
+    name: 'Site Theme',
+    description: 'Customizable Site Theme Colors',
+    tags: [
+      'React', 'Context API', 'TypeScript', 'LocalStorage', 'SASS',
+      'CSS Properties'
+    ],
+    icon: <BrightnessSVG />,
+    logos: [GearSVG],
+    url: 'https://github.com/felfire/portfolio/blob/main/core/components/SiteTemplate/ThemeBar.tsx',
+    summary: "This example uses LocalStorage, React's Context API, and Custom "+
+    "CSS Properties to create customizable site theme colors.",
+    mobileSupport: true,
+    renderComponent: () => <CustomTheme />
+  },
+  {
     name: 'KanBan Tasks',
     description: 'LocalStorage KanBan Task Manager',
     tags: ['React', 'Portal', 'Modals', 'TypeScript', 'Next.js', 'Modals'],
     icon: <BoltSVG />,
     logos: [GearSVG],
     url: 'https://github.com/felfire/portfolio/blob/main/core/components/KanBan/KanBan.tsx',
-    summary: "This CRUD example uses a LocalStorage-based React Hook for "+
-    "storing the tasks you create.",
+    summary: "This KanBan example is a basic CRUD component without a back-end"+
+    " (changes are stored in state). It uses React Portal to handle Modal "+
+    "needs for editing/deleting tasks, and `react-beautiful-dnd` to assist "+
+    "with drag-and-drop functionality.",
     mobileSupport: false,
     renderComponent: () => <KanBan />
   },
@@ -57,21 +74,6 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     " Plus, this way API keys aren't exposed. :)",
     mobileSupport: true,
     renderComponent: () => <ApiDictionary />
-  },
-  {
-    name: 'Site Theme',
-    description: 'Customizable Site Theme Colors',
-    tags: [
-      'React', 'Context API', 'TypeScript', 'LocalStorage', 'SASS',
-      'CSS Properties'
-    ],
-    icon: <BrightnessSVG />,
-    logos: [GearSVG],
-    url: 'https://github.com/felfire/portfolio/blob/main/core/components/SiteTemplate/ThemeBar.tsx',
-    summary: "This example uses LocalStorage, React's Context API, and Custom "+
-    "CSS Properties to create customizable site theme colors.",
-    mobileSupport: true,
-    renderComponent: () => <CustomTheme />
   },
   /*{
     name: 'Game Widget',
