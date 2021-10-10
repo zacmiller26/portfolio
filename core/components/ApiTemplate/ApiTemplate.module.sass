@@ -5,6 +5,7 @@
 .root
   display: flex
   flex-direction: column
+  max-width: 100%
 
   >div
     display: flex
@@ -15,6 +16,8 @@
       background: var(--background-primary)
       padding: $spacing
       border-radius: $spacing * .5
+      overflow: scroll
+      overflow-wrap: break-word
 
     &.header
       display: flex
@@ -26,7 +29,7 @@
         font-weight: 500
         font-size: .95rem
         transition: color .1s
-        
+
         &:hover
           color: var(--text-jaded)
 
@@ -39,6 +42,8 @@
     &.apiResponseSide
       flex: 1
       display: flex
+      max-width: 100%
+      overflow: hidden
 
       em
         color: var(--text-muted)

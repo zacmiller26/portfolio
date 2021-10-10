@@ -52,7 +52,10 @@ const ApiTemplate: React.FC<Props> = props => {
           {props.apiResponse ? <JSONPretty
             id="json-pretty"
             data={props.apiResponse}
-            stringStyle={"color: var(--accent); font-style: italic;"}
+            stringStyle={`
+              color: var(--accent);
+              font-style: italic;
+            `}
             booleanStyle={"color: var(--accent-secondary)"}
             valueStyle={"color: var(--accent-tertiary)"}
             errorStyle="color: var(--accent)"
@@ -62,7 +65,7 @@ const ApiTemplate: React.FC<Props> = props => {
               font-weight: 400;
               color: var(--text-muted);
               line-height: 1.1rem;
-              overflow: scroll
+              overflow: scroll;
             `}
           >
           </JSONPretty>

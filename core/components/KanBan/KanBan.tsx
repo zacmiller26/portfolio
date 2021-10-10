@@ -64,7 +64,7 @@ interface Props {}
 
 const KanBan: React.FC<Props> = () => {
 
-  const [labels, setLabels] = useState(['To Do', 'In Progress', 'Complete'])
+  const [labels, _setLabels] = useState(['To Do', 'In Progress', 'Complete'])
   const [tasks, setTasks] = useState<TaskStateType>(DEFAULT_STATE)
 
   const addTask = useCallback((colIndex: number, newTask: TaskType) => {
