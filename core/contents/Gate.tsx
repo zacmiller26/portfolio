@@ -48,28 +48,31 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
   }, [handleMouseMove])
 
   return (
-    <button
-      onClick={() => close()}
-      className={styles.btn}
-      data-visible={visible}
-      type="button"
-    >
-      {[...Array(100)].map((_, index) => (
-        <Simulacrum
-          key={index}
-          multiply={(index+1) * 2.5} blur={(index+1) * .5} shadow={textShadow} shadowTwo={textShadowTwo}
-        />
-      ))}
-      <a className={styles.link}>
-        <span style={{ textShadow: `${textShadowTwo} rgba(var(--background-secondary-rgb), .7)` }}>
-          {process.env.NEXT_PUBLIC_FIRST_NAME}
-        </span>
-        <em style={{ textShadow: `${textShadow} rgba(var(--background-secondary-rgb), .7)` }}>
-          {process.env.NEXT_PUBLIC_LAST_NAME}
-        </em>
-      </a>
-      <b>{isMobile ? 'Tap' : 'Click'} to enter</b>
-    </button>
+    <>
+      {visible && <div className={styles.mask} />}
+      <button
+        onClick={() => close()}
+        className={styles.btn}
+        data-visible={visible}
+        type="button"
+      >
+        {[...Array(100)].map((_, index) => (
+          <Simulacrum
+            key={index}
+            multiply={(index+1) * 2.5} blur={(index+1) * .5} shadow={textShadow} shadowTwo={textShadowTwo}
+          />
+        ))}
+        <a className={styles.link}>
+          <span style={{ textShadow: `${textShadowTwo} rgba(var(--background-secondary-rgb), .7)` }}>
+            {process.env.NEXT_PUBLIC_FIRST_NAME}
+          </span>
+          <em style={{ textShadow: `${textShadow} rgba(var(--background-secondary-rgb), .7)` }}>
+            {process.env.NEXT_PUBLIC_LAST_NAME}
+          </em>
+        </a>
+        <b>{isMobile ? 'Tap' : 'Click'} to enter</b>
+      </button>
+    </>
   )
 
 }

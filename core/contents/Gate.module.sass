@@ -8,6 +8,7 @@
   position: absolute
   width: 100vw
   height: 100vh
+  overflow: hidden
   display: flex
   top: 0
   align-items: center
@@ -67,8 +68,24 @@
 
 
 @include for-size(mobile)
+
+  .mask
+    @include blurBg(10px)
+    position: absolute
+    left: 0
+    top: 0
+    background: rgba(var(--background-secondary-rgb), .8)
+    width: 100vw
+    height: 100vh
+    z-index: 9
+
   .btn
     flex-direction: column
+    height: 50vh
+    height: calc(50vh - env(safe-area-inset-bottom))
+    margin: 20vh 5vw
+    width: 90vw
+    border-width: 6px
 
     >i
       display: none

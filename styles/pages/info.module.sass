@@ -7,6 +7,7 @@ $btnSize: 3rem
 .root
   position: relative
   height: 100vh
+  height: calc(100vh - env(safe-area-inset-bottom))
   overflow: hidden
 
   .contentsContainer
@@ -20,6 +21,7 @@ $btnSize: 3rem
     .content
       position: relative
       height: 100vh
+      height: calc(100vh - env(safe-area-inset-bottom))
       display: flex
       align-items: center
       width: 100%
@@ -38,6 +40,7 @@ $btnSize: 3rem
   .root
     position: relative
     height: 100vh
+    height: calc(100vh - env(safe-area-inset-bottom))
     overflow: hidden
 
     .arrowBtn

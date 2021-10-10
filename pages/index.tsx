@@ -73,7 +73,7 @@ const IndexPage: NextPage = () => {
 
   return (
     <>
-
+    
       <Head>
         <title>Zac Miller{gated ? '' : ` - ${activeSection[0]}`}</title>
         <link rel="icon" href="/favicon.ico" />
