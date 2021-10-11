@@ -19,15 +19,19 @@ export default function useApi() {
   }, [])
 
   const apiCall = useCallback(async (
-    url: string, formData: FormData, method: "POST" | "PUT") => {
+    url: string, 
+    formData: FormData, 
+    method: "POST" | "PUT"
+  ) => {
 
     clear()
     toggleIsLoading(true)
 
     var newObj: {[key: string]: any} = {}
-    formData.forEach(function(value, key){
-        newObj[key] = value
+    formData.forEach((value, key) => {
+      newObj[key] = value
     })
+
     const body = JSON.stringify(newObj);
 
     await fetch(url, { method, body, headers: DEFAULT_HEADERS })

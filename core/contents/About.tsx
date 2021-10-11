@@ -16,9 +16,8 @@ const About = () => {
       </p>
       <ul>
         <li><span>1.1 billion <em>page views</em></span></li>
-        <li><span>25 million <em>unique users</em></span></li>
+        <li><span>70 million <em>unique users</em></span></li>
         <li><span>3.5 million <em>unique monthly users</em></span></li>
-        <li><span>5,000 requests <em>per second</em></span></li>
       </ul>
       <p>
         A lot was learned in the process, and I'm looking to learn

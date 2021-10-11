@@ -12,7 +12,7 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
   const [textShadow, setTextShadow] = useState('-7.5px 5px 1px')
   const [textShadowTwo, setTextShadowTwo] = useState('7.5px -5px 1px')
   //const [scale, setScale] = useState(1)
-
+  
   const handleMouseMove = useCallback(throttle((e) => {
 
     if(!visible) return
