@@ -7,103 +7,55 @@
   @include buttonReset
   position: absolute
   width: 100vw
-  height: 100vh
+  height: calc(100vh - env(safe-area-inset-bottom))
   overflow: hidden
   display: flex
   top: 0
   align-items: center
   justify-content: center
-  font-family: 'Permanent Marker'
-  font-size: 8rem
   background: var(--background-secondary)
-  border: 1rem solid var(--text-normal)
+  border: .5rem solid var(--text-normal)
   z-index: 99
   transition: top .75s
 
   &[data-visible="false"]
     top: -105vh
-    //background: rgba(var(--background-secondary-rgb), .8)
 
-  >i ,>a
+  span.box
+    padding: $spacing * 1.5
+    position: relative
+    
+    .simulacrum
+      @include absoluteCover
+      border: 1px solid var(--accent)
+      transition: transform .25s
+      opacity: .5
+    
+    .name
+      $fontSize: 9rem
+      $shrink: .55
+      display: flex
+      flex-direction: column
+      text-align: center
+      position: relative
+      text-transform: uppercase
+      font-family: 'Londrina Outline'
+
+      .firstName
+        font-size: $fontSize
+        line-height: $fontSize * ($shrink * 1.2)
+      
+      .lastName
+        font-size: $fontSize * $shrink
+        line-height: $fontSize * $shrink
+        color: var(--accent)
+
+  b.message
     position: absolute
-    display: block
-    width: 100%
-    height: 100%
-    display: flex
-    align-items: center
-    justify-content: center
-    flex-direction: column
-
-  >i
-    opacity: .2
-
-    span, em
-      color: transparent !important
-
-  span
-    margin-right: .85rem
-    color: var(--text-normal)
-    line-height: 1em
-
-  em
-    color: var(--accent)
-    line-height: .5em
-    font-size: .6em
-
-  b
-    position: absolute
-    bottom: 40px
+    bottom: 2rem
     font-family: $fontFamily
     font-size: .9rem
     text-transform: lowercase
     letter-spacing: 3px
     color: var(--text-muted)
     opacity: .5
-
-  &:hover
-    span
-      text-shadow: 4px 4px 1px var(--accent)
-    em
-      text-shadow: 4px 4px 1px var(--text-normal)
-
-
-@include for-size(mobile)
-
-  .mask
-    @include blurBg(10px)
-    position: absolute
-    left: 0
-    top: 0
-    background: rgba(var(--background-secondary-rgb), .8)
-    width: 100vw
-    height: 100vh
-    z-index: 9
-
-  .btn
-    flex-direction: column
-    height: 50vh
-    height: calc(50vh - env(safe-area-inset-bottom))
-    margin: 20vh 5vw
-    width: 90vw
-    border-width: 6px
-
-    >i
-      display: none
-
-    >a
-      display: flex
-      flex-direction: column
-      flex: 1
-
-      span
-        display: block
-        font-size: 7rem
-        line-height: 3rem
-        text-shadow: 4px 4px 1px var(--accent) !important
-        z-index: 9
-
-      em
-        display: block
-        font-size: 5rem
-        line-height: 1.5em
-        text-shadow: -4px -4px 1px var(--text-normal) !important
