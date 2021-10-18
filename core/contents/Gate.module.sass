@@ -22,7 +22,7 @@
     top: -105vh
 
   span.box
-    padding: $spacing * 1.5
+    padding: $spacing * 2
     position: relative
     
     .simulacrum
@@ -32,7 +32,7 @@
       opacity: .5
     
     .name
-      $fontSize: 9rem
+      $fontSize: 9.5rem
       $shrink: .55
       display: flex
       flex-direction: column
@@ -59,3 +59,9 @@
     letter-spacing: 3px
     color: var(--text-muted)
     opacity: .5
+
+
+  @include for-size(tablet-and-down)
+
+   span.box
+     padding: $spacing * .65 !important
