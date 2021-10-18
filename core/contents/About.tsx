@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Image from 'next/image'
 
 import styles from './About.module.sass'
 
 const About = () => {
+  
+  const age = useMemo(() => {
+    const ageYear = Number(process.env.NEXT_PUBLIC_YEAR_OF_BIRTH || 1989)
+    const ageDifMs = Date.now() - ageYear
+    const ageDate = new Date(ageDifMs)
+    return Math.abs(ageDate.getUTCFullYear() - ageYear)
+  }, [])
 
   return (
     <div className={styles.cols}>
@@ -15,7 +22,7 @@ const About = () => {
             {process.env.NEXT_PUBLIC_LAST_NAME}
            </h3>
            <h4>
-             32 - SLC, UT
+             {age} - {process.env.NEXT_PUBLIC_LOCATION}
            </h4>
         </div>
       </div>
