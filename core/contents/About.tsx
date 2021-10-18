@@ -52,11 +52,12 @@ const AboutMeText = () => (
     <p>In the last ten years, <Tag>my projects</Tag> have seen some
     neat metrics, like <Tag>1.1 billion <em>page views</em>,</Tag> 
     <Tag>70 million <em>unique users</em>,</Tag> and 
-    <Tag>3.5 million <em>unique monthly users</em></Tag>
+    <Tag>3.5 million <em>unique monthly users</em>.</Tag>
     </p>
     <p>
-      A lot was learned in the process, and I'm looking to learn
-      more in a <Tag>good team.</Tag> Got one?
+      I've learned a lot through my <Tag>self-employed</Tag> endeavors, 
+      and am looking  to continue learning and growing in a <Tag>team</Tag> 
+      {' '}environment. Let's connect!
     </p>
   </>
 )
@@ -72,8 +73,8 @@ const ProfilePicture = () => {
       <i className={styles.image}>
         <Image 
           src="/images/thumbnail.png" 
-          width={200}
-          height={200}
+          width={226}
+          height={226}
         />
       </i>
 
