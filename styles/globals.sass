@@ -11,9 +11,7 @@ html, body
   font-family: $fontFamily
   margin: 0
   padding: 0
-  height: -webkit-fill-available
   z-index: 0
-  position: relative
   -moz-osx-font-smoothing: grayscale
   -webkit-font-smoothing: antialiased
 
@@ -28,13 +26,11 @@ a
 *
   box-sizing: border-box
 
-#__next
+#__next, html, body
   position: relative
   display: flex
   flex-direction: column
   height: -webkit-fill-available
-  box-sizing: border-box
-
 
 div[data-gradient]
   @include bgGradientY

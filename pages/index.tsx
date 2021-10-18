@@ -79,19 +79,13 @@ const IndexPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <SiteTemplate menuMap={menuMap} goHome={() => setGated(true)}>
+      {!gated && <SiteTemplate menuMap={menuMap} goHome={() => setGated(true)}>
         <div className={styles.root}>
-          <div className={styles.contentsContainer} style={{ top }}>
-            {menuMap.map(([key, ref, component]) => (
-              <div className={styles.content} ref={ref} key={key}>
-                <div>
-                  {component}
-                </div>
-              </div>
-            ))}
+          <div className={styles.content} style={{ top }}>
+            {activeSection[2]}
           </div>
         </div>
-      </SiteTemplate>
+      </SiteTemplate>}
 
       <Gate close={() => setGated(false)} visible={gated} />
 

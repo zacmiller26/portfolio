@@ -1,45 +1,49 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { throttle } from 'lodash'
 
 import useViewportMeta from '../hooks/useViewportMeta'
 import styles from './Gate.module.sass'
 
+const TOFIXED = ( value: number | string, dp: number ) => {
+  return +parseFloat(value.toString()).toFixed( dp );
+}
+
+const NORMALIZE = (
+  val: number, 
+  max: number,
+  min: number, 
+  newMax: number, 
+  newMin: number
+) => {
+  return TOFIXED(newMin + (val - min) * (newMax - newMin) / (max - min), 2)
+}
+
+const MAX = 10
+
+
+interface MouseCoordsType {
+  x: number
+  y: number
+}
 
 const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
 
   const { isMobile, viewport } = useViewportMeta()
 
-  const [textShadow, setTextShadow] = useState('-7.5px 5px 1px')
-  const [textShadowTwo, setTextShadowTwo] = useState('7.5px -5px 1px')
-  
-  const handleMouseMove = useCallback(throttle((e) => {
+  const [mouseCoords, setMouseCoords] = useState<MouseCoordsType>({ 
+    x: -3.5, y: -1
+  })
 
-    if(!visible) return
+  const handleMouseMove = useCallback(throttle((e: MouseEvent) => {
 
-    const normalize = (
-      val: number, max: number, min: number, newMax: number, newMin: number
-    ) => {
-      return newMin + (val - min) * (newMax - newMin) / (max - min)
-    }
+    if(!visible || isMobile) return
 
-    const max = 8
+    setMouseCoords({
+      x: NORMALIZE(e.x, viewport.width, 0, MAX, -MAX),
+      y: NORMALIZE(e.y, viewport.height, 0, MAX, -MAX)
+    })
 
-    let x = normalize(e.x, viewport.width, 0, max, - max)
-    let y = normalize(e.y, viewport.height, 0, max, - max)
-    let iX = (- x)
-    let iY = (- y)
-
-    setTextShadow(`${iX}px ${iY}px 1px`)
-    setTextShadowTwo(`${x}px ${y}px 1px`)
-
-  }, 20), [viewport, visible])
-
-  useEffect(() => {
-    if(!visible) {
-      setTextShadow('')
-      setTextShadowTwo('')
-    }
-  }, [visible])
+  }, 100), [isMobile, visible])
 
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove)
@@ -55,85 +59,69 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
         data-visible={visible}
         type="button"
       >
-        {[...Array(26)].map((_, index) => (
-          <Simulacrum
-            key={index}
-            multiply={(index+1) * 2.75}
-            blur={(index+1) * .5}
-            shadow={textShadow}
-            shadowTwo={textShadowTwo}
-          />
-        ))}
-        <a className={styles.link}>
-          <span style={{ 
-            textShadow: `
-              ${textShadowTwo} rgba(var(--background-secondary-rgb), .7)
-            ` 
-          }}>
-            {process.env.NEXT_PUBLIC_FIRST_NAME}
+        <span className={styles.box}>
+          <BoxSimulacrums count={38} mouseCoords={mouseCoords} />
+          <span className={styles.name}>
+            <em className={styles.firstName}>
+              {process.env.NEXT_PUBLIC_FIRST_NAME}
+              </em>
+            <em className={styles.lastName}>
+              {process.env.NEXT_PUBLIC_LAST_NAME}
+            </em>
           </span>
-          <em style={{ 
-            textShadow: `
-              ${textShadow} rgba(var(--background-secondary-rgb), .7)
-            ` 
-          }}>
-            {process.env.NEXT_PUBLIC_LAST_NAME}
-          </em>
-        </a>
-        <b>{isMobile ? 'Tap' : 'Click'} to enter</b>
+        </span>
+        <b className={styles.message}>
+          {isMobile ? 'Tap' : 'Click'} to enter
+          </b>
       </button>
     </>
   )
 
 }
 
-interface SProps {
-  shadow: string
-  shadowTwo: string
-  multiply: number
-  blur: number
+interface SimulacrumProps {
+  count: number
+  mouseCoords: MouseCoordsType
 }
 
-const Simulacrum: React.FC<SProps> = props => {
+const BoxSimulacrums: React.FC<SimulacrumProps> = props => {
 
-  const { shadow, shadowTwo, multiply, blur } = props
+  const getRotateDegree = (index: number) => {
+    const weight = 2
+    const val = ((- props.mouseCoords.x) + (- props.mouseCoords.y)) / 5
+    const multiply = val //props.mouseCoords.y
+    const even = index % 2
+    return (even ? weight + index : - (weight + index)) * multiply
+  }
 
-  const multiplyShadow = useCallback((
-    shadow: string, multiply: number, blur: number
-  ) => {
+  const getOpacity = (index: number) => {
+    const add = .75
+    const multiply = 100 / props.count
+    return (((index + add) * multiply) / (100))
+  }
 
-    let coords: any = shadow.split('px')
-    coords[0] = Number(coords[0]) * Number(multiply)
-    coords[1] = Number(coords[1]) * Number(multiply)
-    return `${coords[0]}px ${coords[1]}px ${Math.round(blur)}px`
-
-  }, [])
-
-  const spanShadow = useMemo(() => {
-    return multiplyShadow(shadowTwo, multiply, blur)
-  }, [shadowTwo, multiply, blur])
-
-  const emShadow = useMemo(() => {
-    return multiplyShadow(shadow, multiply, blur)
-  }, [shadowTwo, multiply, blur])
-
-  const opacity = useMemo(() => {
-    return Math.round((100/multiply) / 1.1)
-  }, [multiply])
+  const getScale = (index: number) => {
+    const val = (- props.mouseCoords.x) + (- props.mouseCoords.y)
+    return NORMALIZE(val, MAX, -MAX, 1.6, 1)
+  }
 
   return (
-    <i>
-      <span style={{
-        textShadow: `${spanShadow} rgba(var(--text-normal-rgb), .${opacity})`
-      }}>
-        {process.env.NEXT_PUBLIC_FIRST_NAME}
-      </span>
-      <em style={{
-        textShadow: `${emShadow} rgba(var(--accent-rgb), .${opacity})`
-      }}>
-        {process.env.NEXT_PUBLIC_LAST_NAME}
-      </em>
-    </i>
+    <>
+      {[...Array(props.count)].map((_, index) => (
+        <i 
+          key={index} 
+          className={styles.simulacrum} 
+          style={{
+            borderColor: index % 2 ? 'var(--accent)' : 'var(--accent-tertiary)',
+            opacity: getOpacity(index),
+            scale: getScale(index),
+            transform: `
+              rotate(${getRotateDegree(index)}deg) scale(${getScale(index)}
+            `
+          }}
+        />
+      ))}
+    </>
   )
 }
 

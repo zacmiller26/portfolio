@@ -1,69 +1,89 @@
 @import ../../styles/sass/mixins
 @import ../../styles/sass/vars
 
+$bg: var(--background-secondary)
 $avatarSize: 240px
-.root
+.cols
   position: relative
   display: flex
-  flex-direction: column
 
-  ul
-    margin-bottom: $spacing * .75
-    max-width: $spacing * 17
+  .colsLeft
+    $spacing: .8rem
+    margin-right: $spacing * 2
 
-    li
-      min-width: 40%
-      flex: 1
-      font-size: 1.1rem
-      font-weight: 800
-      margin: 0 0 .5rem
+    .profileAbout
+      margin: $spacing 0 $spacing * 2
+      padding-left: $spacing
 
-      &:last-child
-        margin-bottom: 0
+      h3
+        font-size: 1.75rem
+        margin: 0 0 $spacing * .5
+      
+      h4
+        font-size: .9rem
+        font-weight: 300
+        color: var(--accent-secondary)
 
-      em
-        display: inline-flex
-        font-weight: 400
-        font-style: italic
-        color: var(--accent)
+    .profilePicture
+      padding: $spacing
+      position: relative
+      overflow: hidden
+      
+      .corner1
+        position: absolute
+        width: 50%
+        height: 50%
+        background: linear-gradient(to top, var(--accent-tertiary), var(--accent))
+        top: -25%
+        left: -25%
+        transform: rotate(45deg)
+      
+      .corner2
+        position: absolute
+        right: -25%
+        bottom: -25%
+        width: 50%
+        height: 50%
+        background: $bg
+        transform: rotate(45deg)
+        z-index: 9
 
-  p
-    color: var(--text-normal)
-    display: block
-    margin: 0 0 $spacing * .75
-    max-width: $spacing * 15
-    line-height: 1.75rem
-    font-size: 1.1rem
-
-    >i
-      font-size: 2rem
-      font-family: 'Permanent Marker'
-      line-height: 2rem
-      color: var(--text-normal)
-
-      >em
-        color: var(--accent)
-
-    >strong
-      display: flex
-      align-items: center
-
-      >b
-        $size: 5rem
+        &:after
+          content: ""
+          width: 1px
+          height: 100%
+          background: var(--accent)
+          display: block
+          left: $spacing
+          position: absolute
+      
+      i.image
         display: block
-        width: $size
-        height: $size
-        border-radius: $size
-        background: url(/images/thumbnail.png) center
-        background-size: cover
-        background-repeat: no-repeat
-        margin-right: 1rem
+        margin: 0
+        padding: 0
+        box-shadow: 0 1px 15px 0 rgba(0, 0, 0, .1)
+      
+
+  .colsRight
+    flex: 1
+    position: relative
+
+    p
+      color: var(--text-normal)
+      display: block
+      margin: 0 0 $spacing * .75
+      max-width: $spacing * 15
+      line-height: 1.85rem
+      font-size: 1.1rem
 
       >i
-        font-size: 2.4rem
+        font-size: 2rem
         font-family: 'Permanent Marker'
-        line-height: 2.4rem
+        line-height: 2rem
         color: var(--text-normal)
+
+        >em
+          color: var(--accent)
 
 
 .tag
@@ -101,3 +121,19 @@ $avatarSize: 240px
     border-bottom: 0
     border-left: 0
     transform: skewX(-24deg)
+
+
+@include for-size(tablet-and-down)
+
+  .cols
+    flex-direction: column
+
+    .colsLeft
+      display: flex
+      flex-direction: column
+      align-items: center
+
+    .colsRight
+      display: flex
+      flex-direction: column
+      align-items: center

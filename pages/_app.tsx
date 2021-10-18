@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700&family=Codystar:wght@300&family=Permanent+Marker&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Londrina+Outline&family=Permanent+Marker&display=swap"
           rel="stylesheet"
         />
       </Head>
