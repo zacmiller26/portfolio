@@ -1,0 +1,42 @@
+@import ../../../styles/sass/mixins
+@import ../../../styles/sass/vars
+
+.root
+
+    em, i
+        color: var(--accent)
+        display: inline-block
+        margin: 0 .35rem
+
+        &[data-alt]
+            color: var(--accent-tertiary)
+    
+    i
+        border: 2px dotted var(--text-normal)
+        padding: .5rem
+        color: var(--text-normal)
+        border-radius: 1rem
+        font-weight: 600
+        font-size: 1.6rem
+    
+    h2
+        font-size: 1.5rem
+        font-weight: 300
+        display: flex
+        align-items: center
+        width: 100%
+        margin: 0 0 .5rem
+
+    hr
+        border-style: dashed
+        border-color: var(--background-tertiary)
+        margin: 1rem 0
+    
+    p
+        padding: .5rem
+        background: var(--background-primary)
+        margin: .5rem 0
+        font-size: .8rem
+
+    input.alt
+        border-color: var(--accent-tertiary)

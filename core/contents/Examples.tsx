@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 
 import ApiDictionary from '../components/ApiDictionary/ApiDictionary'
 import AuthLogin from '../components/AuthLogin/AuthLogin'
+import Calculator from '../components/Calculator/Calculator'
 import KanBan from '../components/KanBan/KanBan'
 import CustomTheme from '../components/CustomTheme/CustomTheme'
 import NexusBasicTable from '../components/Nexus/nexus-basic-table'

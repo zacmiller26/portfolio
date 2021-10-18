@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { throttle } from 'lodash'
 
 import useViewportMeta from '../hooks/useViewportMeta'
@@ -11,7 +11,6 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
 
   const [textShadow, setTextShadow] = useState('-7.5px 5px 1px')
   const [textShadowTwo, setTextShadowTwo] = useState('7.5px -5px 1px')
-  //const [scale, setScale] = useState(1)
   
   const handleMouseMove = useCallback(throttle((e) => {
 
@@ -33,13 +32,9 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
     setTextShadow(`${iX}px ${iY}px 1px`)
     setTextShadowTwo(`${x}px ${y}px 1px`)
 
-    //let nx = normalize(e.x + e.y, (viewport.width + viewport.height)/2, 0, 1.2, .4)
-    //setScale(+(Math.round(Number(nx + "e+2"))  + "e-2"))
-
   }, 20), [viewport, visible])
 
   useEffect(() => {
-    // reset shadows when not visible
     if(!visible) {
       setTextShadow('')
       setTextShadowTwo('')
@@ -70,10 +65,18 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
           />
         ))}
         <a className={styles.link}>
-          <span style={{ textShadow: `${textShadowTwo} rgba(var(--background-secondary-rgb), .7)` }}>
+          <span style={{ 
+            textShadow: `
+              ${textShadowTwo} rgba(var(--background-secondary-rgb), .7)
+            ` 
+          }}>
             {process.env.NEXT_PUBLIC_FIRST_NAME}
           </span>
-          <em style={{ textShadow: `${textShadow} rgba(var(--background-secondary-rgb), .7)` }}>
+          <em style={{ 
+            textShadow: `
+              ${textShadow} rgba(var(--background-secondary-rgb), .7)
+            ` 
+          }}>
             {process.env.NEXT_PUBLIC_LAST_NAME}
           </em>
         </a>
@@ -106,15 +109,27 @@ const Simulacrum: React.FC<SProps> = props => {
 
   }, [])
 
+  const spanShadow = useMemo(() => {
+    return multiplyShadow(shadowTwo, multiply, blur)
+  }, [shadowTwo, multiply, blur])
+
+  const emShadow = useMemo(() => {
+    return multiplyShadow(shadow, multiply, blur)
+  }, [shadowTwo, multiply, blur])
+
+  const opacity = useMemo(() => {
+    return Math.round((100/multiply) / 1.1)
+  }, [multiply])
+
   return (
     <i>
       <span style={{
-        textShadow: `${multiplyShadow(shadowTwo, multiply, blur)} rgba(var(--text-normal-rgb), .${Math.round((100/multiply) / 1.1)})`
+        textShadow: `${spanShadow} rgba(var(--text-normal-rgb), .${opacity})`
       }}>
         {process.env.NEXT_PUBLIC_FIRST_NAME}
       </span>
       <em style={{
-        textShadow: `${multiplyShadow(shadow, multiply, blur)} rgba(var(--accent-rgb), .${Math.round((100/multiply) / 1.1)})`
+        textShadow: `${emShadow} rgba(var(--accent-rgb), .${opacity})`
       }}>
         {process.env.NEXT_PUBLIC_LAST_NAME}
       </em>
