@@ -1,6 +1,8 @@
+@import ../../styles/sass/animations
 @import ../../styles/sass/mixins
 @import ../../styles/sass/vars
 
+$lineHeight: 1.8rem
 $bg: var(--background-secondary)
 $avatarSize: 240px
 .cols
@@ -37,6 +39,7 @@ $avatarSize: 240px
         top: -25%
         left: -25%
         transform: rotate(45deg)
+        z-index: 7
       
       .corner2
         position: absolute
@@ -57,12 +60,70 @@ $avatarSize: 240px
           left: $spacing
           position: absolute
       
-      i.image
-        display: block
-        margin: 0
-        padding: 0
-        box-shadow: 0 1px 15px 0 rgba(0, 0, 0, .1)
+      .imagesWrapper
+        $size: 226px
+        width: $size
+        height: $size
+        position: relative
+        overflow: hidden
+        
+        .imagesContainer
+          position: absolute
+          top: 0
+          left: 0
+          height: 100%
+          display: flex
+          flex: 1
+          transition: left .5s
+
+          i.image
+            display: block
+            position: relative
+            margin: 0
+            padding: 0
+            box-shadow: 0 1px 15px 0 rgba(0, 0, 0, .1)
+            background: var(--background-secondary)
+            overflow: hidden
+            z-index: 8
+
+            >div
+              @include fadeIn(3s)
+              transition: transform .2s
+
+              img
+                object-fit: cover
+                object-position: top center
+
+            &:hover
+
+              >div
+                transform: scale(1.1)
       
+    .galleryTracker
+      display: flex
+      margin: $spacing * 2 $spacing
+      min-width: 200px
+
+      button
+        @include buttonReset
+        flex: 1
+        height: .5rem
+        border-radius: 1rem
+        border: 1px dashed var(--background-tertiary)
+        margin-right: .5rem
+        position: relative
+        
+        &:hover
+          border: 1px solid transparent
+          background: rgba(var(--accent-rgb), .1)
+
+        &[data-active="true"]
+          border: 1px solid var(--accent)
+          background: var(--accent)
+
+        &:last-child
+          margin-right: 0
+
 
   .colsRight
     flex: 1
@@ -73,7 +134,7 @@ $avatarSize: 240px
       display: block
       margin: 0 0 $spacing * .75
       max-width: $spacing * 15
-      line-height: 1.65rem
+      line-height: $lineHeight
       font-size: 1.1rem
 
       >i
@@ -87,18 +148,21 @@ $avatarSize: 240px
 
 
 .tag
-  $borderWidth: 4px
+  $borderWidth: 2px
   display: inline-block
   color: var(--background-secondary)
   padding: 0 .45rem
   margin: 0 .1rem
-  line-height: 1.4rem
+  line-height: $lineHeight * .9
   font-weight: 600
-  letter-spacing: 1.4px
   position: relative
 
   i
     position: relative
+  
+  em
+    font-weight: 400
+    font-style: italic
 
   &:before
     content: ""
@@ -137,3 +201,6 @@ $avatarSize: 240px
       display: flex
       flex-direction: column
       align-items: center
+
+    .galleryTracker button
+      height: 1rem !important
