@@ -3,7 +3,6 @@ import React from 'react'
 import styles from './SiteMain.module.sass'
 
 interface Props {
-  header?: React.ReactNode
   children: React.ReactNode
 }
 

@@ -2,6 +2,13 @@
 @import ../../styles/sass/vars
 
 
+.root
+  position: fixed
+  width: 100vw
+  height: calc(100vh - env(safe-area-inset-bottom))
+  left: 0
+  top: 0
+
 .btn
   $ts: .1s
   @include buttonReset
@@ -11,10 +18,9 @@
   overflow: hidden
   display: flex
   top: 0
+  left: 0
   align-items: center
   justify-content: center
-  background: var(--background-secondary)
-  border: .25rem solid var(--background-tertiary)
   z-index: 99
   transition: top .75s
 

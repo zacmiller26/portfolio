@@ -2,12 +2,14 @@ import '../styles/globals.sass'
 
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import { AnimatePresence } from "framer-motion"
 
 import { AuthUserProvider } from '../core/contexts/authUser'
 import { SiteThemeProvider } from '../core/contexts/siteTheme'
+import SiteTemplate from '../core/components/SiteTemplate/SiteTemplate'
 
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, router }: AppProps) {
   return (
     <>
       <Head>
@@ -35,7 +37,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <AuthUserProvider>
         <SiteThemeProvider>
-          <Component {...pageProps} />
+          <Head>
+            <title>Zac Miller</title>
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <AnimatePresence initial={false} exitBeforeEnter={true}>
+            <SiteTemplate>
+                <Component {...pageProps} key={router.route} />
+            </SiteTemplate>
+          </AnimatePresence>
         </SiteThemeProvider>
       </AuthUserProvider>
       <div id="modal-root" />

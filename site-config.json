@@ -1,0 +1,7 @@
+{
+    "urls": {
+        "About": "/about",
+        "Code Examples": "/code-examples",
+        "Contact": "/contact"
+    }
+}
