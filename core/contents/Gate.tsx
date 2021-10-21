@@ -37,6 +37,7 @@ const Gate = () => {
   })
 
   const handleMouseMove = useCallback(throttle((e: MouseEvent) => {
+    if(isMobile) return
     setMouseCoords({
       x: NORMALIZE(e.x, viewport.width, 0, MAX, -MAX),
       y: NORMALIZE(e.y, viewport.height, 0, MAX, -MAX)
