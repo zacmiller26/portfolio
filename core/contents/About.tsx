@@ -43,8 +43,8 @@ const AboutMeText = () => (
     </p>
     <p>From his own projects, he's accumulated metrics like
     {' '}<Tag>1.1 billion</Tag> <em>page views</em>,
-    <Tag>70 million</Tag> <em>unique users</em>, and 
-    <Tag>3.5 million</Tag> <em>unique monthly users</em>.
+    {' '}<Tag>70 million</Tag> <em>unique users</em>, and 
+    {' '}<Tag>3.5 million</Tag> <em>unique monthly users</em>.
     </p>
     <p>
       When not online, he loves all things two-wheels, whether that's racing 

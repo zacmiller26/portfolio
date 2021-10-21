@@ -11,7 +11,7 @@ $avatarSize: 240px
   align-items: center
 
   .colsLeft
-    $spacing: .5rem
+    $spacing: 3px
     $br: 12px
     margin-right: 2rem
 
@@ -36,34 +36,26 @@ $avatarSize: 240px
       z-index: 2
       
       .corner1
-        $size: 80%
+        $size: 110%
         position: absolute
         width: $size
-        height:$size
-        background: var(--accent)
+        height: $size
         top: - $size/2
         left: - $size/2
         transform: rotate(45deg)
         z-index: 1
+        background: var(--accent)
       
       .corner2
+        $size: 40%
         position: absolute
-        right: -25%
-        bottom: -25%
-        width: 50%
-        height: 50%
-        background: $bg
+        width: $size
+        height: $size
+        bottom: - $size/2
+        right: - $size/2
         transform: rotate(45deg)
-        z-index: 9
-
-        &:after
-          content: ""
-          width: 4px
-          height: 100%
-          background: var(--background-tertiary)
-          display: block
-          left: $spacing / 2
-          position: absolute
+        z-index: 1
+        background: var(--accent)
       
       .imagesWrapper
         $size: 226px
@@ -73,6 +65,8 @@ $avatarSize: 240px
         border-radius: $br
         overflow: hidden
         z-index: 8
+        border: 4px solid var(--background-secondary)
+        //box-shadow: -2px 2px 12px rgba(0, 0, 0, .1)
         
         .imagesContainer
           position: absolute
@@ -106,7 +100,7 @@ $avatarSize: 240px
       
     .galleryTracker
       display: flex
-      margin: $spacing * 2 $spacing
+      margin: 1.6rem $spacing
       min-width: 200px
 
       button
@@ -143,42 +137,8 @@ $avatarSize: 240px
 
 .tag
   $borderWidth: 2px
-  display: inline-block
-  color: var(--background-secondary)
-  padding: 0 .45rem
-  margin: 0 .1rem
-  line-height: $lineHeight * .9
-  font-weight: 600
-  position: relative
+  color: var(--accent)
 
-  i
-    position: relative
-  
-  em
-    font-weight: 400
-    font-style: italic
-
-  &:before
-    content: ""
-    position: absolute
-    left: 0
-    top: 0
-    width: 100%
-    height: 100%
-    box-sizing: border-box
-    transform: skewX(24deg)
-    background: rgba(var(--accent-rgb), .8)
-    z-index: -1
-    border: $borderWidth solid var(--accent)
-    border-top: 0
-    border-right: 0
-    border-radius: $spacing * .1
-
-  &:nth-child(odd):before
-    border: $borderWidth solid var(--accent)
-    border-bottom: 0
-    border-left: 0
-    transform: skewX(-24deg)
 
 
 @include for-size(tablet-and-down)
