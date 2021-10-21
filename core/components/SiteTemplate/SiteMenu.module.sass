@@ -21,11 +21,17 @@
     animation: growHeight 1s forwards infinite
     animation-iteration-count: 1
 
-  button
-    @include buttonReset
-    margin: $spacing * .25 0
+  .animation
+    display: flex
+    align-items: flex-end
+    flex-direction: column
+    flex: 1
+    justify-content: center
+
+  a
+    margin: $spacing * .45 0
     color: var(--text-normal)
-    font-size: 1.25rem
+    font-size: 1rem
     font-family: $fontFamily
     font-weight: 400
     transition: color .25s
@@ -57,8 +63,7 @@
     bottom: 0
     background: linear-gradient(to right, var(--background-secondary), var(--accent), var(--background-secondary))
 
-  button
-    @include buttonReset
+  a
     border: 2px solid var(--text-muted)
     padding: .75rem
     margin: 0 1.5rem 0 0

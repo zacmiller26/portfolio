@@ -1,6 +1,6 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 
-import { MenuMapType } from '../../../pages/index'
 import SiteMain from './SiteMain'
 import SiteSidebar from './SiteSidebar'
 import CloseSVG from '../../vectors/Close'
@@ -8,17 +8,17 @@ import styles from './SiteTemplate.module.sass'
 
 
 interface Props {
-  menuMap: MenuMapType
-  goHome: Function
   children: React.ReactNode
 }
 
 const SiteTemplate: React.FC<Props> = props => {
 
-  return (
+  const router = useRouter()
+
+  return router.asPath === '/' ? <>{props.children}</> : (
     <div className={styles.root}>
 
-      <SiteSidebar menuMap={props.menuMap} />
+      <SiteSidebar />
 
       <SiteMain>
         {props.children}
@@ -27,7 +27,7 @@ const SiteTemplate: React.FC<Props> = props => {
       <button
         className={styles.homeBtn}
         type="button"
-        onClick={() => props.goHome()}
+        onClick={() => router.push('/')}
       >
         <CloseSVG />
       </button>

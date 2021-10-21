@@ -17,6 +17,7 @@
     "@types/uuid": "^8.3.1",
     "autosize": "^5.0.1",
     "firebase": "^9.1.0",
+    "framer-motion": "^4.1.17",
     "lodash": "^4.17.21",
     "next": "11.1.2",
     "react": "17.0.2",

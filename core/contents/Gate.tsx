@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
+import Link from 'next/link'
 import { throttle } from 'lodash'
+import { motion } from "framer-motion"
 
 import useViewportMeta from '../hooks/useViewportMeta'
 import styles from './Gate.module.sass'
@@ -26,7 +28,7 @@ interface MouseCoordsType {
   y: number
 }
 
-const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
+const Gate = () => {
 
   const { isMobile, viewport } = useViewportMeta()
 
@@ -35,15 +37,11 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
   })
 
   const handleMouseMove = useCallback(throttle((e: MouseEvent) => {
-
-    if(!visible || isMobile) return
-
     setMouseCoords({
       x: NORMALIZE(e.x, viewport.width, 0, MAX, -MAX),
       y: NORMALIZE(e.y, viewport.height, 0, MAX, -MAX)
     })
-
-  }, 100), [isMobile, visible])
+  }, 100), [isMobile])
 
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove)
@@ -51,30 +49,41 @@ const Gate = ({ close, visible }: { close: Function, visible: boolean }) => {
   }, [handleMouseMove])
 
   return (
-    <>
-      {visible && <div className={styles.mask} />}
-      <button
-        onClick={() => close()}
-        className={styles.btn}
-        data-visible={visible}
-        type="button"
-      >
-        <span className={styles.box}>
-          <BoxSimulacrums count={38} mouseCoords={mouseCoords} />
-          <span className={styles.name}>
-            <em className={styles.firstName}>
-              {process.env.NEXT_PUBLIC_FIRST_NAME}
-              </em>
-            <em className={styles.lastName}>
-              {process.env.NEXT_PUBLIC_LAST_NAME}
-            </em>
-          </span>
-        </span>
-        <b className={styles.message}>
-          {isMobile ? 'Tap' : 'Click'} to enter
-          </b>
-      </button>
-    </>
+    <motion.div 
+      className={styles.root}
+      variants={{
+          hidden: { opacity: 0, x: 0, y: 0 },
+          enter: { opacity: 1, x: 0, y: 0 },
+          exit: { opacity: 0, x: 0, y: 0 },
+      }}
+      initial="hidden" // Set the initial state to variants.hidden
+      animate="enter" // Animated state to variants.enter
+      exit="exit"
+      transition={{ 
+          type: 'linear',
+          duration: 1
+      }}
+    >
+      <div className={styles.mask} />
+      <Link href="/about">
+        <a className={styles.btn}>
+            <span className={styles.box}>
+              <BoxSimulacrums count={38} mouseCoords={mouseCoords} />
+              <span className={styles.name}>
+                <em className={styles.firstName}>
+                  {process.env.NEXT_PUBLIC_FIRST_NAME}
+                  </em>
+                <em className={styles.lastName}>
+                  {process.env.NEXT_PUBLIC_LAST_NAME}
+                </em>
+              </span>
+            </span>
+            <b className={styles.message}>
+              {isMobile ? 'Tap' : 'Click'} to enter
+            </b>
+        </a>
+      </Link>
+    </motion.div>
   )
 
 }
