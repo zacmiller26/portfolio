@@ -48,7 +48,7 @@ const AboutMeText = () => (
     </p>
     <p>
       When not online, he loves all things two-wheels, whether that's racing 
-      motorcycles or a morning cycle. 
+      motorcycles or climbing a canyon on the bicycle. 
     </p>
   </>
 )
