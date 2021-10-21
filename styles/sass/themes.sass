@@ -36,7 +36,7 @@ html
   // defaults
   --mobileMaxWidth: #{$mobileMaxWidth}
   --text-error: #E0245E
-  --text-normal: #FFF
+  --text-normal: #D8D8DC
   --text-jaded: #C5D1DA
   --text-muted: #6E7E8C
   --text-normal-rgb: #{hex-to-rgb(#FFF)}
@@ -51,7 +51,8 @@ html
   @include accentMixin('ruby', #ED485F, #FF465F, #ED0D44)
 
   // themes
-  @include themeMixin('dark', #1e232f, #12151C, #323a4e)
+  //@include themeMixin('dark', #1e232f, #12151C, #323a4e)
+  @include themeMixin('dark', #242427, #1C1C1F, #29292C)
   @include themeMixin('purple', #2c0063, #1f0047, #45009c)
   @include themeMixin('blue', #00264D, #001D3C, #002E5D)
   @include themeMixin('light', #FFF, #F5F8FA, #E4E8EB, true)

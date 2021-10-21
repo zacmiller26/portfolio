@@ -16,15 +16,6 @@ const About = () => {
     <div className={styles.cols}>
       <div className={styles.colsLeft}>
         <ProfilePicture />
-        <div className={styles.profileAbout}>
-          <h3>
-            {process.env.NEXT_PUBLIC_FIRST_NAME}{' '}
-            {process.env.NEXT_PUBLIC_LAST_NAME}
-           </h3>
-           <h4>
-             {age} - {process.env.NEXT_PUBLIC_LOCATION}
-           </h4>
-        </div>
       </div>
       <div className={styles.colsRight}>
         <AboutMeText />
@@ -46,20 +37,18 @@ const Tag: React.FC<Props> = (props) => (
 const AboutMeText = () => (
   <>
     <p>
-      I love the full-stack process of taking
-      a new concept and forging it into reality.
-      Especially the front-end: It's all about the UI/UX being seamless, 
-      intuitive and purposeful.
+    Zac is a freelance and a full-stack developer based in 
+    {' '}{process.env.NEXT_PUBLIC_LOCATION} with a passion for bringing ideas
+     to life.
     </p>
-    <p>In the last ten years, <Tag>my projects</Tag> have seen 
-    metrics like <Tag>1.1 billion</Tag> <em>page views</em>,
+    <p>From his own projects, he's accumulated metrics like
+    {' '}<Tag>1.1 billion</Tag> <em>page views</em>,
     <Tag>70 million</Tag> <em>unique users</em>, and 
     <Tag>3.5 million</Tag> <em>unique monthly users</em>.
     </p>
     <p>
-      I've learned a lot through my self-employed endeavors, 
-      and am looking  to continue learning and growing in a team
-      environment. Let's connect!
+      When not online, he loves all things two-wheels, whether that's racing 
+      motorcycles or a morning cycle. 
     </p>
   </>
 )
