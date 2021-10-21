@@ -37,7 +37,7 @@ const Tag: React.FC<Props> = (props) => (
 const AboutMeText = () => (
   <>
     <p>
-    Zac is a freelance and a full-stack developer based in 
+    {process.env.NEXT_PUBLIC_FIRST_NAME} is a freelance and a full-stack developer based in 
     {' '}{process.env.NEXT_PUBLIC_LOCATION} with a passion for bringing ideas
      to life.
     </p>
@@ -54,12 +54,11 @@ const AboutMeText = () => (
 )
 
 const PICTURE_GALLERY = [
-  'hanoi.png',
+  'reeds.png',
   'portland.png',
-  'cycling.png',
+  'vietnam.png',
   'prerace.png',
-  'racing.png',
-  'podium.png'
+  'racing.png'
 ]
 
 const ProfilePicture = () => {

@@ -11,8 +11,9 @@ $avatarSize: 240px
   align-items: center
 
   .colsLeft
-    $spacing: .6rem
-    margin-right: $spacing * 4
+    $spacing: .5rem
+    $br: 12px
+    margin-right: 2rem
 
     .profileAbout
       margin: $spacing 0 $spacing * 2
@@ -31,16 +32,19 @@ $avatarSize: 240px
       padding: $spacing
       position: relative
       overflow: hidden
+      border-radius: $br
+      z-index: 2
       
       .corner1
+        $size: 80%
         position: absolute
-        width: 50%
-        height: 50%
-        background: linear-gradient(to right, var(--accent-tertiary) 10%, var(--accent))
-        top: -25%
-        left: -25%
+        width: $size
+        height:$size
+        background: var(--accent)
+        top: - $size/2
+        left: - $size/2
         transform: rotate(45deg)
-        z-index: 7
+        z-index: 1
       
       .corner2
         position: absolute
@@ -54,11 +58,11 @@ $avatarSize: 240px
 
         &:after
           content: ""
-          width: 1px
+          width: 4px
           height: 100%
-          background: var(--accent)
+          background: var(--background-tertiary)
           display: block
-          left: $spacing
+          left: $spacing / 2
           position: absolute
       
       .imagesWrapper
@@ -66,7 +70,9 @@ $avatarSize: 240px
         width: $size
         height: $size
         position: relative
+        border-radius: $br
         overflow: hidden
+        z-index: 8
         
         .imagesContainer
           position: absolute
@@ -84,7 +90,6 @@ $avatarSize: 240px
             padding: 0
             background: var(--background-secondary)
             overflow: hidden
-            z-index: 8
 
             >div
               @include fadeIn(3s)
@@ -134,15 +139,6 @@ $avatarSize: 240px
       max-width: $spacing * 15
       line-height: $lineHeight
       font-size: 1rem
-
-      >i
-        font-size: 2rem
-        font-family: 'Permanent Marker'
-        line-height: 2rem
-        color: var(--text-normal)
-
-        >em
-          color: var(--accent)
 
 
 .tag
