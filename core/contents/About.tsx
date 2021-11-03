@@ -1,16 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
+
 
 import styles from './About.module.sass'
 
 const About = () => {
-  
-  const age = useMemo(() => {
-    const ageYear = Number(process.env.NEXT_PUBLIC_YEAR_OF_BIRTH || 1989)
-    const ageDifMs = Date.now() - ageYear
-    const ageDate = new Date(ageDifMs)
-    return Math.abs(ageDate.getUTCFullYear() - ageYear)
-  }, [])
 
   return (
     <div className={styles.cols}>

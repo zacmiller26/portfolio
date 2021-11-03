@@ -30,6 +30,8 @@ interface CodeExampleType {
   renderComponent: () => React.ReactNode
 }
 
+const GH_URL = process.env.NEXT_PUBLIC_GITHUB_PROFILE || ''
+
 const CODE_EXAMPLES: CodeExampleType[] = [
   {
     name: 'Site Theme',
@@ -40,7 +42,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     ],
     icon: <BrightnessSVG />,
     logos: [GearSVG],
-    url: 'https://github.com/felfire/portfolio/blob/main/core/components/SiteTemplate/ThemeBar.tsx',
+    url: GH_URL + '/portfolio/blob/main/core/components/SiteTemplate/ThemeBar.tsx',
     summary: "This example uses LocalStorage, React's Context API, and Custom "+
     "CSS Properties to create customizable site theme colors.",
     mobileSupport: true,
@@ -52,7 +54,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     tags: ['React', 'Portal', 'Modals', 'TypeScript', 'Next.js', 'Modals'],
     icon: <BoltSVG />,
     logos: [GearSVG],
-    url: 'https://github.com/felfire/portfolio/blob/main/core/components/KanBan/KanBan.tsx',
+    url: GH_URL + '/portfolio/blob/main/core/components/KanBan/KanBan.tsx',
     summary: "This KanBan example is a basic CRUD component without a back-end"+
     " (changes are stored in state). It uses React Portal to handle Modal "+
     "needs for editing/deleting tasks, and `react-beautiful-dnd` to assist "+
@@ -66,7 +68,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     tags: ['Python', 'Django', 'DRF', 'API', 'POST'],
     icon: <CodeSVG />,
     logos: [CodeSVG],
-    url: 'https://github.com/felfire/portfolio/blob/main/core/components/ApiDictionary/ApiDictionary.tsx',
+    url: GH_URL + '/portfolio/blob/main/core/components/ApiDictionary/ApiDictionary.tsx',
     summary: "This sends a POST request to a Next.js API route that then "+
     "makes a GET request to a Dictionary API, returning the short definition." +
     " The two requests are redundant, but I wanted to feed two birds with one" +
@@ -84,7 +86,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     ],
     icon: <BoltSVG />,
     logos: [GearSVG],
-    url: 'https://github.com/felfire/regex-url',
+    url: GH_URL + '/regex-url',
     summary: "This example uses LocalStorage, React's Context API, and Custom "+
     "CSS Properties to create a customizable site theme.",
     renderComponent: () => <NexusTBCBuild />
@@ -98,7 +100,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     ],
     icon: <TableSVG />,
     logos: [TableSVG],
-    url: 'https://github.com/felfire/portfolio/blob/main/core/components/Nexus/nexus-basic-table/Tables.tsx',
+    url: GH_URL + '/portfolio/blob/main/core/components/Nexus/nexus-basic-table/Tables.tsx',
     summary: "This example is a dynamic table that can expand in rows and "+
     "columns up to the preset limit, with tabs to view the JSON or CSV output."+
     " This uses basic React functionality.",
@@ -114,7 +116,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     ],
     icon: <UserSVG />,
     logos: [TableSVG],
-    url: 'https://github.com/felfire/portfolio/blob/main/core/components/AuthLogin/AuthLogin.tsx',
+    url: GH_URL + '/portfolio/blob/main/core/components/AuthLogin/AuthLogin.tsx',
     summary: "This example uses a Context Hook with all the basic functionality "+
     "for user sessions using Firebase Auth. By using React Context, the "+
     "`authUser` object is readily accessible to any component that needs it.",
@@ -130,7 +132,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     ],
     icon: <BoltSVG />,
     logos: [TableSVG],
-    url: 'https://github.com/felfire/regex-url',
+    url: GH_URL + '/regex-url',
     summary: "This example uses LocalStorage, React's Context API, and Custom "+
     "CSS Properties to create a customizable site theme.",
     renderComponent: () => <AuthLogin />
@@ -144,7 +146,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     ],
     icon: <PenSVG />,
     logos: [TableSVG],
-    url: 'https://github.com/felfire/portfolio/blob/main/core/components/ScratchNView/ScratchNView.tsx',
+    url: GH_URL + '/portfolio/blob/main/core/components/ScratchNView/ScratchNView.tsx',
     summary: "This example lets you run your mouse over the image to reveal it."+
     " A `mouseover` event listener is activated on the panels covering the"+
     " image, which reduces their opacity to 0 when the event is triggered.",
@@ -160,7 +162,7 @@ const CODE_EXAMPLES: CodeExampleType[] = [
     ],
     icon: <TableSVG />,
     logos: [TableSVG],
-    url: 'https://github.com/felfire/regex-url',
+    url: GH_URL + '/regex-url',
     summary: "This example uses a Django DRF API to send and store your "+
     "vote, which utilizes request throttling, rate and total limits to the amount of votes, and shows total voting statistics.",
     renderComponent: () => <ApiVote />
